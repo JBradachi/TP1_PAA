@@ -2,4 +2,4 @@
 
 int IniciaBT();
 
-int RecursãoBT();
+int RecursaoBT();
