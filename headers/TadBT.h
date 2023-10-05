@@ -1,4 +1,5 @@
-#include "TadMapa.h"
+#include "./headers/TadMapa.h"
+
 
 int IniciaBT();
 

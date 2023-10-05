@@ -1,28 +1,29 @@
-#include "TadMapa.h"
+#include "./headers/TadMapa.h"
 
-int alocaMatriz(int linhas, int colunas, int ***matriz){
+
+int alocaMatriz(int linhas, int colunas, Mapa *mapa){
     int i;
-    *matriz = (int **) malloc(linhas * sizeof(int*));
+    mapa->mapa = (int **) malloc(linhas * sizeof(int*));
     for(i=0; i<linhas; i++){
-        (*matriz)[i] = (int* )malloc (colunas * sizeof(int));
+        mapa->mapa[i] = (int* )malloc (colunas * sizeof(int));
     }
 }
 
-int mostraMatriz(int linhas, int colunas, int **matriz){
+int mostraMatriz(int linhas, int colunas, Mapa *mapa){
     int i, j;
     for(i=0; i<linhas; i++){
         for(j=0; j<colunas; j++){
-            printf(" %d ", matriz[i][j]);
+            printf(" %d ", mapa->mapa[i][j]);
         }
         printf("\n");
     }
 }
 
-int preencheMatrizTeste(int linhas, int colunas, int ***matriz){
+int preencheMatrizTeste(int linhas, int colunas, Mapa *mapa){
     int i, j;
     for(i=0; i<linhas; i++){
         for(j=0; j<colunas; j++){
-            (*matriz)[i][j] = 1;
+            mapa->mapa[i][j] = 1;
         }
     }
 }
