@@ -2,10 +2,14 @@
 #include <stdlib.h>
 
 typedef struct Mapa{
-    int **mapa;
-
+    char** mapa;
+    int linha;
+    int coluna;
+    int qntChaves;
+    int locBau[2];
 }Mapa;
 
-int alocaMatriz(int linhas, int colunas, Mapa *mapa);
-int mostraMatriz(int linhas, int colunas, Mapa *mapa);
-int preencheMatrizTeste(int linhas, int colunas, Mapa *mapa);
+int alocaMatriz(Mapa *mapa);
+int mostraMatriz(Mapa *mapa);
+int preencheMatrizTeste(Mapa *mapa);
+int manipulaArquivo(char *pTexto, Mapa *mapa);
