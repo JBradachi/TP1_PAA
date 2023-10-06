@@ -22,7 +22,7 @@ int preencheMatrizTeste(Mapa *mapa){
     int i, j;
     for(i=0; i<mapa->linha; i++){
         for(j=0; j<mapa->coluna; j++){
-            mapa->mapa[i][j] = 1;
+            mapa->mapa[i][j] = 'c';
         }
     }
 }
