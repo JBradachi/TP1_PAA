@@ -25,3 +25,4 @@ int alocaMatriz(TMapa *mapa);
 int mostraMatriz(TMapa *mapa);
 int preencheMatrizTeste(TMapa *mapa);
 int manipulaArquivo(char *pTexto, TMapa *mapa);
+int mostraResultadoGrafico(TMapa* resultado);

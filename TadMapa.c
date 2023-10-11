@@ -68,3 +68,13 @@ int manipulaArquivo(char *pTexto, TMapa *mapa)
     fclose(arquivo);
     return 1;
 }
+
+int MostraResultadoGrafico(TMapa* resultado){
+    int i, j;
+    for(i=0; i<resultado->linha; i++){
+        for(j=0; j<resultado->coluna; j++){
+            printf(" %d ", resultado->mapa[i][j].tipo);
+        }
+        printf("\n");
+    }
+}
