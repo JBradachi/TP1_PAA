@@ -43,6 +43,7 @@ int RecursaoBT(TMapa* mapa, TMapa* resultado, int posX, int posY, int ehCaminhoA
 
                 // salva a matriz
                 if (mapa->mapa[mapa->locBau[0]][mapa->locBau[1]].passo < resultado->mapa[mapa->locBau[0]][mapa->locBau[1]].passo){ // pegar o passo que está no baú
+                    // TODO: salvar todos os resultados
                     SalvaResultado(mapa, resultado);
                     ehCaminho = 0; // analizar pra q serve ehCaminho
                     return 0;
@@ -58,12 +59,12 @@ int RecursaoBT(TMapa* mapa, TMapa* resultado, int posX, int posY, int ehCaminhoA
                     }
                 }
                 else{
-                    ehCaminho = 1;
+                    // ehCaminho = 1;
                 }
             }
         }
     }
-    ehCaminhoAnterior = ehCaminho;
+    ehCaminhoAnterior = ehCaminho; // ehCaminhoAnterior é ponteiro
 }
 
 int salvaResultado(TMapa* mapa, TMapa* resultado){
