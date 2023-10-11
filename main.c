@@ -2,7 +2,7 @@
 #include "./headers/TadMapa.h"
 
 int main(){
-    Mapa m1;
+    TMapa m1;
     char path[100] = "./entradas/";
     char arquivo[30] = "teste.txt";
 

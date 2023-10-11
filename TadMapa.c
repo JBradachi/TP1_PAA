@@ -1,33 +1,33 @@
 #include "./headers/TadMapa.h"
 
 
-int alocaMatriz(Mapa *mapa){
-    mapa->mapa = (char **) malloc(mapa->linha * sizeof(char*));
+int alocaMatriz(TMapa *mapa){
+    mapa->mapa = (TCelula **) malloc(mapa->linha * sizeof(TCelula*));
     for(int i=0; i<(mapa->linha); i++){
-        mapa->mapa[i] = (char* )malloc (mapa->coluna * sizeof(char));
+        mapa->mapa[i] = (TCelula* )malloc (mapa->coluna * sizeof(TCelula));
     }
 }
 
-int mostraMatriz(Mapa *mapa){
+int mostraMatriz(TMapa *mapa){
     int i, j;
     for(i=0; i<mapa->linha; i++){
         for(j=0; j<mapa->coluna; j++){
-            printf(" %c ", mapa->mapa[i][j]);
+            printf(" %c ", mapa->mapa[i][j].tipo);
         }
         printf("\n");
     }
 }
 
-int preencheMatrizTeste(Mapa *mapa){
+int preencheMatrizTeste(TMapa *mapa){
     int i, j;
     for(i=0; i<mapa->linha; i++){
         for(j=0; j<mapa->coluna; j++){
-            mapa->mapa[i][j] = 'c';
+            mapa->mapa[i][j].tipo = 'c';
         }
     }
 }
 
-int manipulaArquivo(char *pTexto, Mapa *mapa)
+int manipulaArquivo(char *pTexto, TMapa *mapa)
 {
     FILE *arquivo;
     char c;
@@ -54,7 +54,8 @@ int manipulaArquivo(char *pTexto, Mapa *mapa)
                 j++;
                 i = 0;
             }else if(valor != ' '){
-                mapa->mapa[i][j] = valor;
+                mapa->mapa[i][j].tipo = valor;
+                mapa->mapa[i][j].passo = 0;
                 i++;
             }
 
