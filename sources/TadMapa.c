@@ -1,6 +1,5 @@
 #include "./headers/TadMapa.h"
 
-
 int alocaMatriz(TMapa *mapa){
     mapa->mapa = (TCelula **) malloc(mapa->linha * sizeof(TCelula*));
     for(int i=0; i<(mapa->linha); i++){
