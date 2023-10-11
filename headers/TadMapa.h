@@ -28,6 +28,7 @@ typedef struct Mapa{
     int locBau[2];
 }TMapa;
 
+int verificaCelula(TMapa *mapa, int X, int Y);
 int alocaMatriz(TMapa *mapa);
 int mostraMatriz(TMapa *mapa);
 int preencheMatrizTeste(TMapa *mapa);

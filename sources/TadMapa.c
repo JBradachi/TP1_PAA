@@ -1,5 +1,15 @@
 #include "./headers/TadMapa.h"
 
+int verificaCelula(TMapa *mapa, int X, int Y){
+    if (X < 0 || X > mapa->coluna){
+        return 0;
+    }
+    if (Y < 0 || Y > mapa->linha){
+        return 0;
+    }
+    return 1;
+}
+
 int alocaMatriz(TMapa *mapa){
     mapa->mapa = (TCelula **) malloc(mapa->linha * sizeof(TCelula*));
     for(int i=0; i<(mapa->linha); i++){
