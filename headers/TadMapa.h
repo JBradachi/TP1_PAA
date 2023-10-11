@@ -19,7 +19,6 @@ typedef struct Mapa{
     int coluna;
     int qntChaves;
     int locBau[2];
-    int qntParedes;
 }TMapa;
 
 int alocaMatriz(TMapa *mapa);

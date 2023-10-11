@@ -47,7 +47,6 @@ int manipulaArquivo(char *pTexto, TMapa *mapa)
         fscanf(arquivo, "%d %d", &mapa->locBau[0], &mapa->locBau[1]);
 
         alocaMatriz(mapa);
-        mapa->qntParedes = 0; // conta quantas paredes tem
         while (fscanf(arquivo, "%c", &valor) != EOF)
         { 
             if (valor == '\n')
@@ -55,9 +54,6 @@ int manipulaArquivo(char *pTexto, TMapa *mapa)
                 j++;
                 i = 0;
             }else if(valor != ' '){
-                if(valor == '1'){
-                    mapa->qntParedes++;
-                }
                 mapa->mapa[i][j].tipo = valor;
                 mapa->mapa[i][j].passo = 0;
                 i++;
