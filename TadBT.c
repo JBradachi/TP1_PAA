@@ -1,12 +1,12 @@
 #include "./headers/TadBT.h"
 
 int IniciaBT(TMapa* mapa, TMapa* resultado){
-    int v[4] = {0, -1, 0, 1}, h[4] = {1, 0, -1, 0}, q = 0; // com essa configutação indiana bones anda -> direita -> baixo -> esquerda -> cima.
+    int v[4] = {0, -1, 0, 1}, h[4] = {1, 0, -1, 0}, ehCaminho = 0; // com essa configutação indiana bones anda -> direita -> baixo -> esquerda -> cima.
     mapa->mapa[0][0].passo = 1; // ponto de início
 
     inicializaResultado(mapa, resultado);
 
-    RecursaoBT(mapa, resultado, 0, 0, q, v, h, 1, 0);
+    RecursaoBT(mapa, resultado, 0, 0, ehCaminho, v, h, 1, 0);
 
     if (resultado->mapa[0][0].passo != 0){
         // retorna resultado obtido
@@ -25,6 +25,8 @@ int RecursaoBT(TMapa* mapa, TMapa* resultado, int posX, int posY, int ehCaminhoA
         xn = posX + h[i];
         yn = posY + v[i];
         if((xn < mapa->coluna) && (yn < mapa->linha) && (mapa->mapa[xn][yn].tipo != '1') && (mapa->mapa[xn][yn].passo == 0)){ // != "1" testa se é diferente de parede
+            
+            mapa->mapa[xn][yn].passo = passo+1; // ultima passada no baú conta como passo?
 
             if(mapa->mapa[xn][yn].tipo == 'C'){
                     chavesObtidas++;
@@ -47,7 +49,6 @@ int RecursaoBT(TMapa* mapa, TMapa* resultado, int posX, int posY, int ehCaminhoA
                 }
             }
             else{
-                mapa->mapa[xn][yn].passo = passo+1; // ultima passada no baú conta como passo?
 
                 RecursaoBT(mapa, resultado, xn, yn, ehCaminho, v, h, passo+1, chavesObtidas);
                 if(ehCaminho == 0){

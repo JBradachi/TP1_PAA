@@ -6,3 +6,4 @@ int RecursaoBT(TMapa* mapa, TMapa* resultado, int posX, int posY, int q, int v[4
 
 int SalvaResultado(TMapa* mapa, TMapa* resultado);
 
+int inicializaResultado(TMapa* mapa, TMapa* resultado);
