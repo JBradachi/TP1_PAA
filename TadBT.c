@@ -43,7 +43,7 @@ int RecursaoBT(TMapa* mapa, TMapa* resultado, int posX, int posY, int v[4], int 
                 // salva a matriz
                 if (mapa->mapa[mapa->locBau[0]][mapa->locBau[1]].passo < resultado->mapa[mapa->locBau[0]][mapa->locBau[1]].passo){ // pegar o passo que está no baú
                     // TODO: salvar todos os resultados
-                    SalvaResultado(mapa, resultado);
+                    salvaResultado(mapa, resultado);
                     return 0;
                 }
             }
