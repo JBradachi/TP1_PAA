@@ -1,4 +1,4 @@
-#include "./headers/TadMapa.h"
+#include "../headers/TadMapa.h"
 
 int verificaCelula(TMapa *mapa, int X, int Y){
     if (X < 0 || X > mapa->coluna){
@@ -21,7 +21,23 @@ int mostraMatriz(TMapa *mapa){
     int i, j;
     for(i=0; i<mapa->linha; i++){
         for(j=0; j<mapa->coluna; j++){
-            printf(" %c ", mapa->mapa[i][j].tipo);
+            switch (mapa->mapa[i][j].tipo){
+                case Parede:
+                    printf(" 1 ");
+                    break;
+                case EspacoVazio:
+                    printf(" 0 ");
+                    break;
+                case Chave:
+                    printf(" C ");
+                    break;
+                case Bau:
+                    printf(" X ");
+                    break;
+                
+                default:
+                    break;
+                }
         }
         printf("\n");
     }
@@ -63,7 +79,24 @@ int manipulaArquivo(char *pTexto, TMapa *mapa)
                 j++;
                 i = 0;
             }else if(valor != ' '){
-                mapa->mapa[i][j].tipo = valor;
+                switch (valor)
+                {
+                case '1':
+                    mapa->mapa[i][j].tipo = Parede;
+                    break;
+                case '0':
+                    mapa->mapa[i][j].tipo = EspacoVazio;
+                    break;
+                case 'C':
+                    mapa->mapa[i][j].tipo = Chave;
+                    break;
+                case 'X':
+                    mapa->mapa[i][j].tipo = Bau;
+                    break;
+                
+                default:
+                    break;
+                }
                 mapa->mapa[i][j].passo = 0;
                 i++;
             }
