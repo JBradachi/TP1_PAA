@@ -33,7 +33,7 @@ int manipulaArquivo(char *pTexto, Mapa *mapa)
     char c;
     char valor = 'n';
     int i = 0;
-    int j = 0;
+    int j = -1;
 
 
     // fscanf lê uma linha inteira do arquivo
@@ -54,7 +54,7 @@ int manipulaArquivo(char *pTexto, Mapa *mapa)
                 j++;
                 i = 0;
             }else if(valor != ' '){
-                mapa->mapa[i][j] = valor;
+                mapa->mapa[j][i] = valor;
                 i++;
             }
 
