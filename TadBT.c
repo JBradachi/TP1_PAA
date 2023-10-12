@@ -1,12 +1,12 @@
 #include "./headers/TadBT.h"
 
 int IniciaBT(TMapa* mapa, TMapa* resultado){
-    int v[4] = {0, -1, 0, 1}, h[4] = {1, 0, -1, 0}, ehCaminho = 0; // com essa configutação indiana bones anda -> direita -> baixo -> esquerda -> cima.
+    int v[4] = {0, -1, 0, 1}, h[4] = {1, 0, -1, 0}; // com essa configutação indiana bones anda -> direita -> baixo -> esquerda -> cima.
     mapa->mapa[0][0].passo = 1; // ponto de início
 
     inicializaResultado(mapa, resultado);
 
-    RecursaoBT(mapa, resultado, 0, 0, ehCaminho, v, h, 1, 0);
+    RecursaoBT(mapa, resultado, 0, 0, v, h, 1, 0);
 
     if (resultado->mapa[0][0].passo != 0){
         // retorna resultado obtido
@@ -16,15 +16,14 @@ int IniciaBT(TMapa* mapa, TMapa* resultado){
     }
 }
 
-int RecursaoBT(TMapa* mapa, TMapa* resultado, int posX, int posY, int ehCaminhoAnterior, int v[4], int h[4], int passo, int chavesObtidas){
-    int xn, yn, ehCaminho, i=-1; // só pra i começar em 0 no while
+int RecursaoBT(TMapa* mapa, TMapa* resultado, int posX, int posY, int v[4], int h[4], int passo, int chavesObtidas){
+    int xn, yn, i=-1; // só pra i começar em 0 no while
     
-    while(ehCaminho || i<3){
+    while(i<3){
         i++;
-        ehCaminho = 0;
         xn = posX + h[i];
         yn = posY + v[i];
-        if((xn < mapa->coluna) && (yn < mapa->linha) && (mapa->mapa[xn][yn].tipo != '1') && (mapa->mapa[xn][yn].passo == 0)){ // != "1" testa se é diferente de parede
+        if(verificaBT(xn, yn, mapa)){ // != "1" testa se é diferente de parede
             
             mapa->mapa[xn][yn].passo = passo+1; // ultima passada no baú conta como passo?
 
@@ -34,7 +33,7 @@ int RecursaoBT(TMapa* mapa, TMapa* resultado, int posX, int posY, int ehCaminhoA
 
             if((chavesObtidas != mapa->qntChaves) && (mapa->mapa[xn][yn].tipo == 'X')){
                 // chegou no baú sem chave, volta pra buscar as chaves 
-                ehCaminho = 0; // analizar pra q serve ehCaminho
+                // analizar pra q serve ehCaminho
                 return 0;
             }
             else if((chavesObtidas == mapa->qntChaves) && (mapa->mapa[xn][yn].tipo == 'X')){
@@ -45,26 +44,21 @@ int RecursaoBT(TMapa* mapa, TMapa* resultado, int posX, int posY, int ehCaminhoA
                 if (mapa->mapa[mapa->locBau[0]][mapa->locBau[1]].passo < resultado->mapa[mapa->locBau[0]][mapa->locBau[1]].passo){ // pegar o passo que está no baú
                     // TODO: salvar todos os resultados
                     SalvaResultado(mapa, resultado);
-                    ehCaminho = 0; // analizar pra q serve ehCaminho
                     return 0;
                 }
             }
             else{
 
-                RecursaoBT(mapa, resultado, xn, yn, ehCaminho, v, h, passo+1, chavesObtidas);
-                if(ehCaminho == 0){
-                    mapa->mapa[xn][yn].passo = 0; // volta o passo, desmarca o caminho
-                    if(mapa->mapa[xn][yn].tipo == 'C'){
-                        chavesObtidas--;
-                    }
+                RecursaoBT(mapa, resultado, xn, yn, v, h, passo+1, chavesObtidas);
+            
+                mapa->mapa[xn][yn].passo = 0; // volta o passo, desmarca o caminho
+                if(mapa->mapa[xn][yn].tipo == 'C'){
+                    chavesObtidas--;
                 }
-                else{
-                    // ehCaminho = 1;
-                }
+                return 0;
             }
         }
     }
-    ehCaminhoAnterior = ehCaminho; // ehCaminhoAnterior é ponteiro
 }
 
 int salvaResultado(TMapa* mapa, TMapa* resultado){
@@ -85,3 +79,10 @@ int inicializaResultado(TMapa* mapa, TMapa* resultado){
         }
     }
 }
+
+int verificaBT(int xn, int yn, TMapa* mapa){
+    if ((xn < mapa->coluna) && (yn < mapa->linha) && (mapa->mapa[xn][yn].tipo != '1') && (mapa->mapa[xn][yn].passo == 0) && xn>0 && yn>0){
+        return 1;
+    }
+    return 0;
+};
