@@ -28,8 +28,12 @@ typedef struct Mapa{
     int locBau[2];
 }TMapa;
 
+int ehParede(TMapa *mapa, int X, int Y);
+int ehChave(TMapa *mapa, int X, int Y);
+int ehBau(TMapa *mapa, int X, int Y);
 int verificaCelula(TMapa *mapa, int X, int Y);
 int alocaMatriz(TMapa *mapa);
 int mostraMatriz(TMapa *mapa);
+int mostraMatrizPassos(TMapa *mapa);
 int preencheMatrizTeste(TMapa *mapa);
 int manipulaArquivo(char *pTexto, TMapa *mapa);
