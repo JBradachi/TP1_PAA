@@ -1,4 +1,4 @@
-#include "./headers/TadBT.h"
+#include "../headers/TadBT.h"
 
 int IniciaBT(TMapa* mapa, TMapa* resultado){
     int v[4] = {0, -1, 0, 1}, h[4] = {1, 0, -1, 0}; // com essa configutação indiana bones anda -> direita -> baixo -> esquerda -> cima.
