@@ -1,11 +1,14 @@
 #include "../headers/TadMapa.h"
 
 //retorna 1 para celula valida e 0 para invalida
+
 int verificaCelula(TMapa *mapa, int X, int Y){
-    if (X < 0 || X > mapa->coluna){
+
+    // TODO: verificar se a ordem X = coluna e Y = linha esta correta
+    if (X < 0 || X >= mapa->coluna){
         return 0;
     }
-    if (Y < 0 || Y > mapa->linha){
+    if (Y < 0 || Y >= mapa->linha){
         return 0;
     }
     return 1;
