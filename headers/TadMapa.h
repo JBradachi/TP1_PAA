@@ -5,7 +5,7 @@
 #define WHT   "\x1B[37m"
 #define YLW   "\033[33m"
 #define RED   "\033[31m"
-#define GRY   "\033[37m"
+#define GRN     "\033[32m"
 #define NONE  "\033[0m"
 
 

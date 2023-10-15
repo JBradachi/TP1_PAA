@@ -14,23 +14,23 @@ int mostraMatriz(TMapa *mapa){
         for(j=0; j<mapa->coluna; j++){
             switch (mapa->mapa[i][j].tipo){
                 case Parede:
-                    printf(" 1 ");
+                    printf(GRN " 1 ");
                     break;
                 case EspacoVazio:
-                    printf(" 0 ");
+                    printf( WHT " 0 ");
                     break;
                 case Chave:
-                    printf(" C ");
+                    printf(YLW " C ");
                     break;
                 case Bau:
-                    printf(" X ");
+                    printf(RED " X ");
                     break;
                 
                 default:
                     break;
                 }
         }
-        printf("\n");
+        printf(NONE"\n");
     }
 }
 
@@ -106,26 +106,22 @@ int mostraResultadoGrafico(TMapa* resultado){
     int i, j;
     for(i=0; i<resultado->linha; i++){
         for(j=0; j<resultado->coluna; j++){
-            
-            if(resultado->mapa[i][j].passo > 0){
                 if(resultado->mapa[i][j].tipo == Parede){
-                    printf( GRY " %d ", resultado->mapa[i][j].passo);
-                }else if(resultado->mapa[i][j].tipo == EspacoVazio){
+                    printf( GRN " P ");
+                }else if(resultado->mapa[i][j].tipo == EspacoVazio && resultado->mapa[i][j].passo == 0){
+                    printf( WHT " %d ", resultado->mapa[i][j].passo);
+                }else if(resultado->mapa[i][j].tipo == EspacoVazio && resultado->mapa[i][j].passo > 0){
                     printf( CYN " %d ", resultado->mapa[i][j].passo);
                 }else if(resultado->mapa[i][j].tipo == Bau){
                     printf( RED " %d ", resultado->mapa[i][j].passo);
                 }else if(resultado->mapa[i][j].tipo == Chave){
                     printf( YLW " %d ", resultado->mapa[i][j].passo);
                 }
-                
-            }else{
-                printf( WHT " %d ", resultado->mapa[i][j].passo);
-            }
             
             if(resultado->mapa[i][j].passo < 10){
                 printf(" ");
             }
         }
-        printf("\n");
+        printf(NONE"\n");
     }
 }

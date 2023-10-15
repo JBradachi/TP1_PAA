@@ -9,9 +9,11 @@ int IniciaBT(TMapa* mapa, TMapa* resultado){
     RecursaoBT(mapa, resultado, 0, 0, v, h, 1, 0);
     
     if (resultado->mapa[0][0].passo != 0){
+        printf("\n");
         mostraResultadoGrafico(resultado);
 
     }else{
+        printf("\n");
         printf("Indiana Jones nao consegue abrir o bau :( ");
     }
     return 0;
@@ -27,9 +29,13 @@ int RecursaoBT(TMapa* mapa, TMapa* resultado, int posX, int posY, int v[4], int 
         if(verificaBT(xn, yn, mapa)){ 
             
             // SE QUISER VER O Q TA ROLANDO EM TEMPO REAL SÓ TIRAR OS "//" ABAIXO
-
-            //mostraMatriz(mapa);
+            
+            //printf("\n");
             //mostraTempoReal(mapa);
+            //printf("\n");
+            //mostraMatriz(mapa);
+            
+            
             
             mapa->mapa[yn][xn].passo = passo+1; // ultima passada no baú conta como passo?
             
@@ -108,7 +114,7 @@ int verificaSeEhMenosCustoso(TMapa* mapa, TMapa* resultado,int xn,int yn){
     return 0;
 }
 int mostraTempoReal(TMapa* mapa){
-    int teste;
+    system("sleep 0.1");
     mostraResultadoGrafico(mapa);
-    scanf("%d", &teste);
+    fflush(stdout);
 };
