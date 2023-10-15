@@ -106,8 +106,20 @@ int mostraResultadoGrafico(TMapa* resultado){
     int i, j;
     for(i=0; i<resultado->linha; i++){
         for(j=0; j<resultado->coluna; j++){
+            
             if(resultado->mapa[i][j].passo > 0){
-                printf(" %d ", resultado->mapa[i][j].passo);
+                if(resultado->mapa[i][j].tipo == Parede){
+                    printf( GRY " %d ", resultado->mapa[i][j].passo);
+                }else if(resultado->mapa[i][j].tipo == EspacoVazio){
+                    printf( CYN " %d ", resultado->mapa[i][j].passo);
+                }else if(resultado->mapa[i][j].tipo == Bau){
+                    printf( RED " %d ", resultado->mapa[i][j].passo);
+                }else if(resultado->mapa[i][j].tipo == Chave){
+                    printf( YLW " %d ", resultado->mapa[i][j].passo);
+                }
+                
+            }else{
+                printf( WHT " %d ", resultado->mapa[i][j].passo);
             }
             
             if(resultado->mapa[i][j].passo < 10){
