@@ -1,5 +1,39 @@
 #include "../headers/TadMapa.h"
 
+//retorna 1 para celula valida e 0 para invalida
+int verificaCelula(TMapa *mapa, int X, int Y){
+    if (X < 0 || X > mapa->coluna){
+        return 0;
+    }
+    if (Y < 0 || Y > mapa->linha){
+        return 0;
+    }
+    return 1;
+}
+
+//retorna se eh parede
+int ehParede(TMapa *mapa, int X, int Y){
+    if (mapa->mapa[X][Y].tipo == Parede){
+        return 1;
+    }
+    return 0;
+}
+
+//retorna se eh chave
+int ehChave(TMapa *mapa, int X, int Y){
+    if (mapa->mapa[X][Y].tipo == Chave){
+        return 1;
+    }
+    return 0;
+}
+
+//retorna se eh bau
+int ehBau(TMapa *mapa, int X, int Y){
+    if (mapa->mapa[X][Y].tipo == Bau){
+        return 1;
+    }
+    return 0;
+}
 
 int alocaMatriz(TMapa *mapa){
     mapa->mapa = (TCelula **) malloc(mapa->linha * sizeof(TCelula*));
@@ -29,6 +63,17 @@ int mostraMatriz(TMapa *mapa){
                 default:
                     break;
                 }
+        }
+        printf("\n");
+    }
+}
+
+
+int mostraMatrizPassos(TMapa *mapa){
+    int i, j;
+    for(i=0; i<mapa->linha; i++){
+        for(j=0; j<mapa->coluna; j++){
+            printf("\t%d ", mapa->mapa[i][j].passo);
         }
         printf("\n");
     }
