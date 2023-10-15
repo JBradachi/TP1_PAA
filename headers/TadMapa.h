@@ -2,10 +2,17 @@
 #include <stdlib.h>
 #include <string.h>
 
-typedef struct Celula{
-    char tipo; // tipo de cada celula da matriz
+enum MaterialLabirinto { //Material labirinto (se e parede, se e espaço vazio, etc)
+    EspacoVazio,
+    Parede,
+    Bau,
+    Chave
+};
+typedef struct Celula {
+    enum MaterialLabirinto tipo; // para cada celula, guarda seu tipo (a enum serve para facilitar o entendimento)
     int passo; // passo do indiana bones, se 0 então ele não passou por lá
 }TCelula;
+
 
 // Como salvar a matriz? a matriz resposta faz parte do tad ou é uma matriz separada?
 // para o caso de mostrar todas as possibilidades de caminhos colocar flag na recursãoBT e dentro dela chamar o mostra matriz
@@ -21,6 +28,7 @@ typedef struct Mapa{
     int locBau[2];
 }TMapa;
 
+int verificaCelula(TMapa *mapa, int X, int Y);
 int alocaMatriz(TMapa *mapa);
 int mostraMatriz(TMapa *mapa);
 int preencheMatrizTeste(TMapa *mapa);
