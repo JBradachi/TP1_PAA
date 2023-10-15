@@ -1,14 +1,5 @@
 #include "../headers/TadMapa.h"
 
-int verificaCelula(TMapa *mapa, int X, int Y){
-    if (X < 0 || X > mapa->coluna){
-        return 0;
-    }
-    if (Y < 0 || Y > mapa->linha){
-        return 0;
-    }
-    return 1;
-}
 
 int alocaMatriz(TMapa *mapa){
     mapa->mapa = (TCelula **) malloc(mapa->linha * sizeof(TCelula*));
@@ -47,7 +38,7 @@ int preencheMatrizTeste(TMapa *mapa){
     int i, j;
     for(i=0; i<mapa->linha; i++){
         for(j=0; j<mapa->coluna; j++){
-            mapa->mapa[i][j].tipo = 'c';
+            mapa->mapa[i][j].tipo = 1;
         }
     }
 }
@@ -58,7 +49,7 @@ int manipulaArquivo(char *pTexto, TMapa *mapa)
     char c;
     char valor = 'n';
     int i = 0;
-    int j = 0;
+    int j = -1;
 
 
     // fscanf lê uma linha inteira do arquivo
