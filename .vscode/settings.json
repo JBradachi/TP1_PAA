@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "*.c": "c",
+        "tadbt.h": "c",
+        "tadmapa.h": "c"
+    }
+}

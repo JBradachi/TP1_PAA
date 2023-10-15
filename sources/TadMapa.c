@@ -73,16 +73,16 @@ int manipulaArquivo(char *pTexto, TMapa *mapa)
                 switch (valor)
                 {
                 case '1':
-                    mapa->mapa[i][j].tipo = Parede;
+                    mapa->mapa[j][i].tipo = Parede;
                     break;
                 case '0':
-                    mapa->mapa[i][j].tipo = EspacoVazio;
+                    mapa->mapa[j][i].tipo = EspacoVazio;
                     break;
                 case 'C':
-                    mapa->mapa[i][j].tipo = Chave;
+                    mapa->mapa[j][i].tipo = Chave;
                     break;
                 case 'X':
-                    mapa->mapa[i][j].tipo = Bau;
+                    mapa->mapa[j][i].tipo = Bau;
                     break;
                 
                 default:
@@ -102,11 +102,17 @@ int manipulaArquivo(char *pTexto, TMapa *mapa)
     return 1;
 }
 
-int MostraResultadoGrafico(TMapa* resultado){
+int mostraResultadoGrafico(TMapa* resultado){
     int i, j;
     for(i=0; i<resultado->linha; i++){
         for(j=0; j<resultado->coluna; j++){
-            printf(" %d ", resultado->mapa[i][j].tipo);
+            if(resultado->mapa[i][j].passo > 0){
+                printf(" %d ", resultado->mapa[i][j].passo);
+            }
+            
+            if(resultado->mapa[i][j].passo < 10){
+                printf(" ");
+            }
         }
         printf("\n");
     }

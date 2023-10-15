@@ -1,6 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#define CYN   "\x1B[36m"
+#define WHT   "\x1B[37m"
+#define YLW   "\033[33m"
+#define RED   "\033[31m"
+#define GRY   "\033[37m"
+#define NONE  "\033[0m"
+
 
 enum MaterialLabirinto { //Material labirinto (se e parede, se e espaço vazio, etc)
     EspacoVazio,
