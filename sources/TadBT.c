@@ -32,13 +32,16 @@ int RecursaoBT(TMapa* mapa, TMapa* resultado, int posX, int posY, int v[4], int 
     int xn, yn, i=-1; // só pra i começar em 0 no while
     
     // "i" é o indice referente a como indiana bones irá dar pelo labirinto
+    // linhas 36, 37, 38 e 39 são as possíveis movimentações
     while(i<3){
         i++;
         xn = posX + h[i];
         yn = posY + v[i];
+
+        // verifica se é possível ir para o lugar, se não for testa a próxima movimentação
         if(verificaBT(xn, yn, mapa)){ 
             
-            // SE QUISER VER O Q TA ROLANDO EM TEMPO REAL SÓ TIRAR OS "//" ABAIXO
+            // SE QUISER VER O QUE ESTA ROLANDO EM TEMPO REAL SÓ TIRAR OS "//" ABAIXO
             
             //printf("\n");
             //mostraTempoReal(mapa);
@@ -48,7 +51,6 @@ int RecursaoBT(TMapa* mapa, TMapa* resultado, int posX, int posY, int v[4], int 
             
             // atualização dos passos
             // ultima passada no baú conta como passo
-
             mapa->mapa[yn][xn].passo = passoAtual+1; 
             
             // se for chave aumenta a quantidade de chaves obtidas
@@ -79,9 +81,11 @@ int RecursaoBT(TMapa* mapa, TMapa* resultado, int posX, int posY, int v[4], int 
                 // volta o passo, desmarca o caminho para procurar outros caminhos
                 mapa->mapa[yn][xn].passo = 0;
             }
+
+            // se não for baú avança até encontrar o baú
             else{
 
-                // avança na matriz 
+                // avança no mapa 
                 RecursaoBT(mapa, resultado, xn, yn, v, h, passoAtual+1, chavesObtidas);
                 
                 // volta o passo, desmarca o caminho para procurar outros caminhos
