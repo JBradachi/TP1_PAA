@@ -17,7 +17,7 @@ int mostraMatriz(TMapa *mapa){
                     printf(GRN " 1 ");
                     break;
                 case EspacoVazio:
-                    printf( WHT " 0 ");
+                    printf( CYN " 0 ");
                     break;
                 case Chave:
                     printf(YLW " C ");
@@ -109,9 +109,9 @@ int mostraResultadoGrafico(TMapa* resultado){
                 if(resultado->mapa[i][j].tipo == Parede){
                     printf( GRN " P ");
                 }else if(resultado->mapa[i][j].tipo == EspacoVazio && resultado->mapa[i][j].passo == 0){
-                    printf( WHT " %d ", resultado->mapa[i][j].passo);
-                }else if(resultado->mapa[i][j].tipo == EspacoVazio && resultado->mapa[i][j].passo > 0){
                     printf( CYN " %d ", resultado->mapa[i][j].passo);
+                }else if(resultado->mapa[i][j].tipo == EspacoVazio && resultado->mapa[i][j].passo > 0){
+                    printf( WHT " %d ", resultado->mapa[i][j].passo);
                 }else if(resultado->mapa[i][j].tipo == Bau){
                     printf( RED " %d ", resultado->mapa[i][j].passo);
                 }else if(resultado->mapa[i][j].tipo == Chave){
