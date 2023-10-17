@@ -88,7 +88,7 @@ int manipulaArquivo(char *pTexto, TMapa *mapa)
                 default:
                     break;
                 }
-                mapa->mapa[i][j].passo = 0;
+                mapa->mapa[j][i].passo = 0;
                 i++;
             }
 
