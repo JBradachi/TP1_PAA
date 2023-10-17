@@ -67,36 +67,29 @@ int RecursaoBackTracking(TMapa * mapa, TMapa * resultado){
 }
 
 int corpoRecursao(TMapa * mapa, TMapa * resultado, int X, int Y, int *voltaApagando, int passo, int *ChavesObtidas){
-    printf ("Estou no passo %d\nTotal de chaves: %d\nVolta apagando: %d\n", passo, *ChavesObtidas, *voltaApagando);
-    printf ("\n");
     //Condicoes de parada
     if (!verificaCelula(mapa, X, Y)){ //a celula esta fora do escopo da matriz
-        printf("celula nao existe\n");
         *voltaApagando = 1;
         return 0;
     }
     if (ehParede(mapa, X, Y)){
-        printf("eh parede\n");
         *voltaApagando = 1;
         return 0;
     }
     else if (mapa->mapa[X][Y].passo != 0){ // o passo é diferente de zero e nao se trata da celula inicial
-        printf("ja passou por aqui\n");
         *voltaApagando = 1;
         return 0;
     }
 
     // verificaçoes 
     if (ehChave(mapa, X, Y)){
-        printf("eh chave\n");
         *ChavesObtidas += 1;
         mapa->mapa[X][Y].passo = passo;
         *voltaApagando = 0;
     }
 
     else if (ehBau(mapa, X, Y) && *(ChavesObtidas) != mapa->qntChaves){
-        printf("Numero de chaves erradas\n");
-        mostraMatrizPassos(mapa);
+        //printf("Numero de chaves erradas\n");
         *voltaApagando = 1;
         return 0;
     }
@@ -110,22 +103,19 @@ int corpoRecursao(TMapa * mapa, TMapa * resultado, int X, int Y, int *voltaApaga
         mostraMatrizPassos(mapa);
 
         //estou saindo para nao executar tudo, mas se deixar, ele ira procurar todas
-        exit(0);
+        //exit(0);
         *voltaApagando = 1;
     }
     mapa->mapa[X][Y].passo = passo;
 
-    //Recursao (direita, baixo, esquerda, cima)
+    //Ordem da Recursao (direita, baixo, esquerda, cima)
     corpoRecursao(mapa, resultado, X, Y+1, voltaApagando, passo + 1, ChavesObtidas);
     corpoRecursao(mapa, resultado, X+1, Y, voltaApagando, passo + 1, ChavesObtidas);
     corpoRecursao(mapa, resultado, X, Y-1, voltaApagando, passo + 1, ChavesObtidas);
     corpoRecursao(mapa, resultado, X-1, Y, voltaApagando, passo + 1, ChavesObtidas);
-    
-    mostraMatrizPassos(mapa);
 
     //caso dê erro, procedimento que volta apagando
     if (voltaApagando){
-        printf("apagou\n");
         if (ehChave(mapa, X, Y)){
             *ChavesObtidas -= 1;
         }
