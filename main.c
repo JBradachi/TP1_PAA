@@ -1,5 +1,5 @@
 #include <string.h>
-#include "./headers/TadMapa.h"
+#include "./headers/TadBT.h"
 
 int main(){
     TMapa m1, resultado;

@@ -1,5 +1,42 @@
 #include "../headers/TadMapa.h"
 
+//retorna se eh parede
+int ehParede(TMapa *mapa, int X, int Y){
+    if (mapa->mapa[X][Y].tipo == Parede){
+        return 1;
+    }
+    return 0;
+}
+
+//retorna se eh chave
+int ehChave(TMapa *mapa, int X, int Y){
+    if (mapa->mapa[X][Y].tipo == Chave){
+        return 1;
+    }
+    return 0;
+}
+
+//retorna se eh bau
+int ehBau(TMapa *mapa, int X, int Y){
+    if (mapa->mapa[X][Y].tipo == Bau){
+        return 1;
+    }
+    return 0;
+}
+
+int celulaValida(int xn, int yn, TMapa* mapa){
+    
+    // verifica se está dentro do mapa
+    if(xn>=0 && yn>=0 && (xn < mapa->coluna) && (yn < mapa->linha)){
+
+        // verifica se é possível ir (caso de ser parede e caso de ser caminho já andado)
+        if (!ehParede(mapa, yn, xn) && (mapa->mapa[yn][xn].passo == 0)){
+            return 1;
+        }
+    }
+    
+    return 0;
+}
 
 int alocaMatriz(TMapa *mapa){
     mapa->mapa = (TCelula **) malloc(mapa->linha * sizeof(TCelula*));
