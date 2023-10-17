@@ -7,6 +7,15 @@
 #define RED   "\033[31m"
 #define GRN     "\033[32m"
 #define NONE  "\033[0m"
+#ifdef _WIN32
+    #include <windows.h>
+    #define SLEEP_MS(ms) Sleep(ms)
+    #define clear() system("cls"); 
+#else
+    #include <unistd.h>
+    #define clear() system("clear");
+    #define SLEEP_MS(ms) usleep(ms * 1000)
+#endif
 
 
 enum MaterialLabirinto { //Material labirinto (se e parede, se e espaço vazio, etc)

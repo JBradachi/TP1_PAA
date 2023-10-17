@@ -1,1 +1,10 @@
+# Ignorar executáveis
 *.exe
+*.out
+*.dll
+*.so
+*.app
+exec
+
+# Ignorar a pasta .vscode
+.vscode/

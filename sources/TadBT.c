@@ -1,5 +1,5 @@
 #include "../headers/TadBT.h"
-#include <windows.h>
+
 
 int IniciaBT(TMapa* mapa, TMapa* resultado){
 
@@ -152,7 +152,7 @@ int verificaSeEhMenosCustoso(TMapa* mapa, TMapa* resultado,int xn,int yn){
 
 int mostraTempoReal(TMapa* mapa){
 
-    Sleep(500);
+    SLEEP_MS(500);
     mostraResultadoGrafico(mapa);
     fflush(stdout);
 
