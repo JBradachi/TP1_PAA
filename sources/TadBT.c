@@ -2,7 +2,8 @@
 
 int IniciaBT(TMapa* mapa, TMapa* resultado){
 
-    int v[4] = {0, 1, 0, -1}, h[4] = {1, 0, -1, 0}; 
+    int v[4] = {0, 1, 0, -1}, h[4] = {1, 0, -1, 0};
+    int quantCaminhos = 0; 
     // com essa configutação indiana bones anda -> direita -> baixo -> esquerda -> cima.
     
     // ponto de início já começa como 1
@@ -12,12 +13,13 @@ int IniciaBT(TMapa* mapa, TMapa* resultado){
     inicializaResultado(mapa, resultado);
 
     // inicia a recursão do primeiro ponto
-    RecursaoBT(mapa, resultado, 0, 0, v, h, 1, 0);
+    RecursaoBT(mapa, resultado, 0, 0, v, h, 1, 0, &quantCaminhos);
     
     // se possúi resultado (variável resultado foi alterada), mostra o resultado
     if (resultado->mapa[0][0].passo != 0){
         printf("\n");
         mostraResultadoGrafico(resultado);
+        printf("\nForam encontrados %d caminho(s) diferente(s)\n", quantCaminhos);
 
     }
     else{
@@ -28,7 +30,7 @@ int IniciaBT(TMapa* mapa, TMapa* resultado){
     return 0;
 }
 
-int RecursaoBT(TMapa* mapa, TMapa* resultado, int posX, int posY, int v[4], int h[4], int passoAtual, int chavesObtidas){
+int RecursaoBT(TMapa* mapa, TMapa* resultado, int posX, int posY, int v[4], int h[4], int passoAtual, int chavesObtidas, int* quantCaminhos){
     int xn, yn, i=-1; // só pra i começar em 0 no while
     
     // "i" é o indice referente a como indiana bones irá dar pelo labirinto
@@ -71,6 +73,7 @@ int RecursaoBT(TMapa* mapa, TMapa* resultado, int posX, int posY, int v[4], int 
                 // TODO: salvar todos os resultados
 
                 // chegou no baú
+                *quantCaminhos += 1;
                 // verifica se o caminho obtido é o menor caminho encontrado
                 if (verificaSeEhMenosCustoso(mapa, resultado, xn, yn)){
 
@@ -86,7 +89,7 @@ int RecursaoBT(TMapa* mapa, TMapa* resultado, int posX, int posY, int v[4], int 
             else{
 
                 // avança no mapa 
-                RecursaoBT(mapa, resultado, xn, yn, v, h, passoAtual+1, chavesObtidas);
+                RecursaoBT(mapa, resultado, xn, yn, v, h, passoAtual+1, chavesObtidas, quantCaminhos);
                 
                 // volta o passo, desmarca o caminho para procurar outros caminhos
                 mapa->mapa[yn][xn].passo = 0; 
