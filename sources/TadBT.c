@@ -30,18 +30,18 @@ int IniciaBT(TMapa* mapa, TMapa* resultado){
     return 0;
 }
 
-int RecursaoBT(TMapa* mapa, TMapa* resultado, int posX, int posY, int v[4], int h[4], int passoAtual, int chavesObtidas, int* quantCaminhos){
+int RecursaoBT(TMapa* mapa, TMapa* resultado, int posX, int posY, int movimentoX[4], int movimentoY[4], int passoAtual, int chavesObtidas, int* quantCaminhos){
     int xn, yn, i=-1; // só pra i começar em 0 no while
     
     // "i" é o indice referente a como indiana bones irá dar pelo labirinto
     // linhas 36, 37, 38 e 39 são as possíveis movimentações
     while(i<3){
         i++;
-        xn = posX + h[i];
-        yn = posY + v[i];
+        xn = posX + movimentoX[i];
+        yn = posY + movimentoY[i];
 
         // verifica se é possível ir para o lugar, se não for testa a próxima movimentação
-        if(verificaBT(xn, yn, mapa)){ 
+        if(verificaCelula(xn, yn, mapa)){ 
             
             // SE QUISER VER O QUE ESTA ROLANDO EM TEMPO REAL SÓ TIRAR OS "//" ABAIXO
             
@@ -89,7 +89,7 @@ int RecursaoBT(TMapa* mapa, TMapa* resultado, int posX, int posY, int v[4], int 
             else{
 
                 // avança no mapa 
-                RecursaoBT(mapa, resultado, xn, yn, v, h, passoAtual+1, chavesObtidas, quantCaminhos);
+                RecursaoBT(mapa, resultado, xn, yn, movimentoX, movimentoY, passoAtual+1, chavesObtidas, quantCaminhos);
                 
                 // volta o passo, desmarca o caminho para procurar outros caminhos
                 mapa->mapa[yn][xn].passo = 0; 
@@ -128,20 +128,6 @@ int inicializaResultado(TMapa* mapa, TMapa* resultado){
     // inicia o passo do baú com o máximo possível
     resultado->mapa[mapa->locBau[0]][mapa->locBau[1]].passo = (mapa->coluna) * (mapa->linha)+1;
 
-    return 0;
-}
-
-int verificaBT(int xn, int yn, TMapa* mapa){
-    
-    // verifica se está dentro do mapa
-    if(xn>=0 && yn>=0 && (xn < mapa->coluna) && (yn < mapa->linha)){
-
-        // verifica se é possível ir (caso de ser parede e caso de ser caminho já andado)
-        if ((mapa->mapa[yn][xn].tipo != Parede ) && (mapa->mapa[yn][xn].passo == 0)){
-            return 1;
-        }
-    }
-    
     return 0;
 }
 

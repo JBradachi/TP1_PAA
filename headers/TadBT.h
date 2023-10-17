@@ -8,8 +8,6 @@ int salvaResultado(TMapa* mapa, TMapa* resultado);
 
 int inicializaResultado(TMapa* mapa, TMapa* resultado);
 
-int verificaBT(int xn, int yn, TMapa* mapa);
-
 int verificaSeEhMenosCustoso(TMapa* mapa, TMapa* resultado,int xn,int yn);
 
 int mostraTempoReal(TMapa* mapa);

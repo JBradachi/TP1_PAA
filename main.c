@@ -1,5 +1,5 @@
 #include <string.h>
-#include "./headers/TadMapa.h"
+#include "./headers/TadBT.h"
 
 int main(){
     TMapa m1, resultado;
@@ -9,10 +9,11 @@ int main(){
     scanf("%s", &arquivo);
 
     strcat(path, arquivo);
-    manipulaArquivo(path, &m1);
-    mostraMatriz(&m1);
-    
-    IniciaBT(&m1, &resultado);
+    if (manipulaArquivo(path, &m1)){
+        mostraMatriz(&m1);
+        IniciaBT(&m1, &resultado);
+    }
+
 
     return 0;
 }
