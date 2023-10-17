@@ -5,7 +5,7 @@ int IniciaBT(TMapa* mapa, TMapa* resultado){
 
     int movimentoX[4] = {0, 1, 0, -1}, movimentoY[4] = {1, 0, -1, 0};
     int quantCaminhos = 0; 
-    // com essa configutação indiana bones anda -> direita -> baixo -> esquerda -> cima.
+    // com essa configutação indiana bones anda: direita -> baixo -> esquerda -> cima.
     
     // ponto de início já começa como 1
     mapa->mapa[0][0].passo = 1; 
@@ -20,6 +20,7 @@ int IniciaBT(TMapa* mapa, TMapa* resultado){
     if (resultado->mapa[0][0].passo != 0){
         printf("\n");
         mostraResultadoGrafico(resultado);
+        mostraVetorResultado(resultado, 0, 0, 1);
         printf("\nForam encontrados %d caminho(s) diferente(s)\n", quantCaminhos);
 
     }
@@ -71,12 +72,18 @@ int RecursaoBT(TMapa* mapa, TMapa* resultado, int posX, int posY, int movimentoX
             // se for baú e tem a quantidade de chaves o suficiente
             else if((chavesObtidas == mapa->qntChaves) && (mapa->mapa[xn][yn].tipo == Bau)){
 
-                // TODO: salvar todos os resultados
+                // mostra todas as possibilidades de resultado
 
-                // chegou no baú
+                // TODO: criar flag para caso nao se queira mostrar tudo
+                printf("Possivel possibilidade:\n");
+                mostraVetorResultado(mapa, 0, 0, 1);
+
+                // conta quantidade de caminhos existentes
                 *quantCaminhos += 1;
+
                 // verifica se o caminho obtido é o menor caminho encontrado
                 if (verificaSeEhMenosCustoso(mapa, resultado, xn, yn)){
+
 
                     // salva o resultado de menor caminho
                     salvaResultado(mapa, resultado);
@@ -152,3 +159,15 @@ int mostraTempoReal(TMapa* mapa){
     return 0;
 }
 
+int mostraVetorResultado(TMapa *resultado, int X, int Y, int passo){
+    if (ehBau(resultado, X, Y)){
+        printf("[%d][%d]\n", X, Y);
+        return 0;
+    }
+    printf("[%d][%d],", X,Y);
+    if (celulaDentroDoMapa(X+1, Y, resultado) && resultado->mapa[X+1][Y].passo == passo+1) mostraVetorResultado(resultado, X+1, Y, passo+1);
+    else if (celulaDentroDoMapa(X, Y+1, resultado) && resultado->mapa[X][Y+1].passo == passo+1) mostraVetorResultado(resultado, X, Y+1, passo+1);
+    else if (celulaDentroDoMapa(X-1, Y, resultado) && resultado->mapa[X-1][Y].passo == passo+1) mostraVetorResultado(resultado, X-1, Y, passo+1);
+    else if (celulaDentroDoMapa(X, Y-1, resultado) && resultado->mapa[X][Y-1].passo == passo+1) mostraVetorResultado(resultado, X, Y-1, passo+1);
+
+}

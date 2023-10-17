@@ -11,3 +11,5 @@ int inicializaResultado(TMapa* mapa, TMapa* resultado);
 int verificaSeEhMenosCustoso(TMapa* mapa, TMapa* resultado,int xn,int yn);
 
 int mostraTempoReal(TMapa* mapa);
+
+int mostraVetorResultado(TMapa *resultado, int X, int Y, int passo);

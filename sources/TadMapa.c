@@ -24,15 +24,12 @@ int ehBau(TMapa *mapa, int X, int Y){
     return 0;
 }
 
-int celulaValida(int xn, int yn, TMapa* mapa){
+//retorna 1 se a celula existe
+int celulaDentroDoMapa(int xn, int yn, TMapa* mapa){
     
     // verifica se está dentro do mapa
-    if(xn>=0 && yn>=0 && (xn < mapa->coluna) && (yn < mapa->linha)){
-
-        // verifica se é possível ir (caso de ser parede e caso de ser caminho já andado)
-        if (!ehParede(mapa, yn, xn) && (mapa->mapa[yn][xn].passo == 0)){
-            return 1;
-        }
+    if(xn>=0 && yn>=0 && (yn < mapa->coluna) && (xn < mapa->linha)){
+        return 1;
     }
     
     return 0;
@@ -41,10 +38,10 @@ int celulaValida(int xn, int yn, TMapa* mapa){
 int verificaCelula(int xn, int yn, TMapa* mapa){
     
     // verifica se está dentro do mapa
-    if(xn>=0 && yn>=0 && (yn < mapa->coluna) && (xn < mapa->linha)){
+    if(celulaDentroDoMapa(xn, yn, mapa)){
 
         // verifica se é possível ir (caso de ser parede e caso de ser caminho já andado)
-        if ((mapa->mapa[xn][yn].tipo != Parede ) && (mapa->mapa[xn][yn].passo == 0)){
+        if ((!ehParede(mapa, xn, yn)) && (mapa->mapa[xn][yn].passo == 0)){
             return 1;
         }
     }

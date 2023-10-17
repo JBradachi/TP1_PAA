@@ -43,5 +43,5 @@ int mostraResultadoGrafico(TMapa* resultado);
 int ehParede(TMapa *mapa, int X, int Y);
 int ehChave(TMapa *mapa, int X, int Y);
 int ehBau(TMapa *mapa, int X, int Y);
-int celulaValida(int xn, int yn, TMapa* mapa);
+int celulaDentroDoMapa(int xn, int yn, TMapa* mapa);
 int verificaCelula(int xn, int yn, TMapa* mapa);
