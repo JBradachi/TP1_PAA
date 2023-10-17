@@ -50,7 +50,7 @@ int celulaValida(int xn, int yn, TMapa* mapa){
     if(celulaDentroDoMapa(xn, yn, mapa)){
 
         // verifica se é possível ir (caso de ser parede e caso de ser caminho já andado)
-        if (!ehParede(mapa, yn, xn) && (mapa->mapa[yn][xn].passo == 0)){
+        if (!ehParede(mapa, xn, yn) && (mapa->mapa[xn][yn].passo == 0)){
             return 1;
         }
     }

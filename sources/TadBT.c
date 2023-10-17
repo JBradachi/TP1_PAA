@@ -53,22 +53,22 @@ int RecursaoBT(TMapa* mapa, TMapa* resultado, int posX, int posY, int movimentoX
             // atualização dos passos
 
             // ultima passada no baú conta como passo
-            mapa->mapa[yn][xn].passo = passoAtual+1; 
+            mapa->mapa[xn][yn].passo = passoAtual+1; 
             
             // se for chave aumenta a quantidade de chaves obtidas
-            if(ehChave(mapa, yn, xn)){
+            if(ehChave(mapa, xn, yn)){
                     chavesObtidas++;
                 }
 
             // se for baú e não tem a quantidade de chaves o suficiente
-            if((chavesObtidas != mapa->qntChaves) && ehBau(mapa, yn, xn)){
+            if((chavesObtidas != mapa->qntChaves) && ehBau(mapa, xn, yn)){
 
                 // chegou no baú sem chave, volta pra buscar as chaves 
-                mapa->mapa[yn][xn].passo = 0;
+                mapa->mapa[xn][yn].passo = 0;
             }
 
             // se for baú e tem a quantidade de chaves o suficiente
-            else if((chavesObtidas == mapa->qntChaves) && ehBau(mapa, yn, xn)){
+            else if((chavesObtidas == mapa->qntChaves) && ehBau(mapa, xn, yn)){
 
                 // TODO: salvar todos os resultados
 
@@ -82,7 +82,7 @@ int RecursaoBT(TMapa* mapa, TMapa* resultado, int posX, int posY, int movimentoX
                 }
 
                 // volta o passo, desmarca o caminho para procurar outros caminhos
-                mapa->mapa[yn][xn].passo = 0;
+                mapa->mapa[xn][yn].passo = 0;
             }
 
             // se não for baú avança até encontrar o baú
@@ -92,7 +92,7 @@ int RecursaoBT(TMapa* mapa, TMapa* resultado, int posX, int posY, int movimentoX
                 RecursaoBT(mapa, resultado, xn, yn, movimentoX, movimentoY, passoAtual+1, chavesObtidas);
                 
                 // volta o passo, desmarca o caminho para procurar outros caminhos
-                mapa->mapa[yn][xn].passo = 0; 
+                mapa->mapa[xn][yn].passo = 0; 
             }
         }
     }
