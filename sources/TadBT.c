@@ -1,7 +1,7 @@
 #include "../headers/TadBT.h"
 
 
-int IniciaBT(TMapa* mapa, TMapa* resultado){
+int IniciaBT(TMapa* mapa, TMapa* resultado, char mostrarPossibilidades){
 
     int movimentoX[4] = {0, 1, 0, -1}, movimentoY[4] = {1, 0, -1, 0};
     int quantCaminhos = 0; 
@@ -14,12 +14,14 @@ int IniciaBT(TMapa* mapa, TMapa* resultado){
     inicializaResultado(mapa, resultado);
 
     // inicia a recursão do primeiro ponto
-    RecursaoBT(mapa, resultado, 0, 0, movimentoX, movimentoY, 1, 0, &quantCaminhos);
+    RecursaoBT(mapa, resultado, 0, 0, movimentoX, movimentoY, 1, 0, &quantCaminhos, mostrarPossibilidades);
     
     // se possúi resultado (variável resultado foi alterada), mostra o resultado
     if (resultado->mapa[0][0].passo != 0){
         printf("\n");
+        printf("\nMatriz resultado: \n");
         mostraResultadoGrafico(resultado);
+        printf("\nVetor resultado: \n");
         mostraVetorResultado(resultado, 0, 0, 1);
         printf("\nForam encontrados %d caminho(s) diferente(s)\n", quantCaminhos);
 
@@ -32,7 +34,7 @@ int IniciaBT(TMapa* mapa, TMapa* resultado){
     return 0;
 }
 
-int RecursaoBT(TMapa* mapa, TMapa* resultado, int posX, int posY, int movimentoX[4], int movimentoY[4], int passoAtual, int chavesObtidas, int* quantCaminhos){
+int RecursaoBT(TMapa* mapa, TMapa* resultado, int posX, int posY, int movimentoX[4], int movimentoY[4], int passoAtual, int chavesObtidas, int* quantCaminhos, char mostrarPossibilidades){
     int xn, yn, i=-1; // só pra i começar em 0 no while
     
     // "i" é o indice referente a como indiana bones irá dar pelo labirinto
@@ -73,10 +75,10 @@ int RecursaoBT(TMapa* mapa, TMapa* resultado, int posX, int posY, int movimentoX
             else if((chavesObtidas == mapa->qntChaves) && ehBau(mapa, xn, yn)){
 
                 // mostra todas as possibilidades de resultado
-
-                // TODO: criar flag para caso nao se queira mostrar tudo
-                printf("Possivel possibilidade:\n");
-                mostraVetorResultado(mapa, 0, 0, 1);
+                if(mostrarPossibilidades == 'S'){
+                    printf("Possivel possibilidade:\n");
+                    mostraVetorResultado(mapa, 0, 0, 1);
+                }
 
                 // conta quantidade de caminhos existentes
                 *quantCaminhos += 1;
@@ -97,7 +99,7 @@ int RecursaoBT(TMapa* mapa, TMapa* resultado, int posX, int posY, int movimentoX
             else{
 
                 // avança no mapa 
-                RecursaoBT(mapa, resultado, xn, yn, movimentoX, movimentoY, passoAtual+1, chavesObtidas, quantCaminhos);
+                RecursaoBT(mapa, resultado, xn, yn, movimentoX, movimentoY, passoAtual+1, chavesObtidas, quantCaminhos, mostrarPossibilidades);
                 
                 // volta o passo, desmarca o caminho para procurar outros caminhos
                 mapa->mapa[xn][yn].passo = 0; 

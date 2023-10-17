@@ -2,7 +2,7 @@
 #include "./headers/TadBT.h"
 
 void pausar(){
-    printf("\n\nPressione ENTER para continuar... ");
+    printf(NONE "\n\nPressione ENTER para continuar... ");
     
     // Aguarda até que o usuário pressione Enter
     getchar();
@@ -12,6 +12,7 @@ void pausar(){
 int main(){
     TMapa m1, resultado;
     int opcao, isLido;
+    char mostrarPossibilidades;
     char path[100] = "./entradas/";
     char arquivo[30] = "teste copy.txt";
     
@@ -36,7 +37,12 @@ int main(){
                 else printf(RED "\nERRO!!! Nenhum arquivo inserido\n");
                 break;
             case 3: 
-                if(isLido)  IniciaBT(&m1, &resultado);
+                if(isLido){
+                    printf("\nDeseja mostrar todas as possiveis possibilidades de caminho? [S/N] \n >>> ");
+                    scanf(" %c%*[^\n]",&mostrarPossibilidades);
+                    printf("\n");
+                    IniciaBT(&m1, &resultado, mostrarPossibilidades);
+                }  
                 else printf(RED "\nERRO!!! Nenhum arquivo inserido\n");
                 break;
             case 4:
