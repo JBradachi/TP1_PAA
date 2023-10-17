@@ -18,7 +18,7 @@ int IniciaBT(TMapa* mapa, TMapa* resultado){
     if (resultado->mapa[0][0].passo != 0){
         printf("\n");
         mostraResultadoGrafico(resultado);
-
+        mostraMatrizResultado(resultado, 0, 0, 1);
     }
     else{
         printf("\n");

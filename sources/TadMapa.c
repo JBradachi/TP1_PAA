@@ -1,5 +1,18 @@
 #include "../headers/TadMapa.h"
 
+int mostraMatrizResultado(TMapa *resultado, int X, int Y, int passo){
+    if (ehBau(resultado, X, Y)){
+        printf("[%d][%d]", X, Y);
+        return 0;
+    }
+    printf("[%d][%d],", X,Y);
+    if (celulaDentroDoMapa(X+1, Y, resultado) && resultado->mapa[X+1][Y].passo == passo+1) mostraMatrizResultado(resultado, X+1, Y, passo+1);
+    else if (celulaDentroDoMapa(X, Y+1, resultado) && resultado->mapa[X][Y+1].passo == passo+1) mostraMatrizResultado(resultado, X, Y+1, passo+1);
+    else if (celulaDentroDoMapa(X-1, Y, resultado) && resultado->mapa[X-1][Y].passo == passo+1) mostraMatrizResultado(resultado, X-1, Y, passo+1);
+    else if (celulaDentroDoMapa(X, Y-1, resultado) && resultado->mapa[X][Y-1].passo == passo+1) mostraMatrizResultado(resultado, X, Y-1, passo+1);
+
+}
+
 //retorna se eh parede
 int ehParede(TMapa *mapa, int X, int Y){
     if (mapa->mapa[X][Y].tipo == Parede){
@@ -24,10 +37,17 @@ int ehBau(TMapa *mapa, int X, int Y){
     return 0;
 }
 
+int celulaDentroDoMapa(int X, int Y, TMapa* mapa){
+     if(X>=0 && Y>=0 && (X < mapa->coluna) && (Y < mapa->linha)){
+        return 1;
+     }
+     return 0;
+}
+
 int celulaValida(int xn, int yn, TMapa* mapa){
     
     // verifica se está dentro do mapa
-    if(xn>=0 && yn>=0 && (xn < mapa->coluna) && (yn < mapa->linha)){
+    if(celulaDentroDoMapa(xn, yn, mapa)){
 
         // verifica se é possível ir (caso de ser parede e caso de ser caminho já andado)
         if (!ehParede(mapa, yn, xn) && (mapa->mapa[yn][xn].passo == 0)){

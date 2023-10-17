@@ -45,3 +45,5 @@ int ehParede(TMapa *mapa, int X, int Y);
 int ehChave(TMapa *mapa, int X, int Y);
 int ehBau(TMapa *mapa, int X, int Y);
 int celulaValida(int xn, int yn, TMapa* mapa);
+int mostraMatrizResultado(TMapa *resultado, int X, int Y, int passo);
+int celulaDentroDoMapa(int X, int Y, TMapa* mapa);
