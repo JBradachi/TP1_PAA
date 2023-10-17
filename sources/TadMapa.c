@@ -41,10 +41,10 @@ int celulaValida(int xn, int yn, TMapa* mapa){
 int verificaCelula(int xn, int yn, TMapa* mapa){
     
     // verifica se está dentro do mapa
-    if(xn>=0 && yn>=0 && (xn < mapa->coluna) && (yn < mapa->linha)){
+    if(xn>=0 && yn>=0 && (yn < mapa->coluna) && (xn < mapa->linha)){
 
         // verifica se é possível ir (caso de ser parede e caso de ser caminho já andado)
-        if ((mapa->mapa[yn][xn].tipo != Parede ) && (mapa->mapa[yn][xn].passo == 0)){
+        if ((mapa->mapa[xn][yn].tipo != Parede ) && (mapa->mapa[xn][yn].passo == 0)){
             return 1;
         }
     }

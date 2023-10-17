@@ -1,8 +1,9 @@
 #include "../headers/TadBT.h"
+#include <windows.h>
 
 int IniciaBT(TMapa* mapa, TMapa* resultado){
 
-    int v[4] = {0, 1, 0, -1}, h[4] = {1, 0, -1, 0};
+    int movimentoX[4] = {0, 1, 0, -1}, movimentoY[4] = {1, 0, -1, 0};
     int quantCaminhos = 0; 
     // com essa configutação indiana bones anda -> direita -> baixo -> esquerda -> cima.
     
@@ -13,7 +14,7 @@ int IniciaBT(TMapa* mapa, TMapa* resultado){
     inicializaResultado(mapa, resultado);
 
     // inicia a recursão do primeiro ponto
-    RecursaoBT(mapa, resultado, 0, 0, v, h, 1, 0, &quantCaminhos);
+    RecursaoBT(mapa, resultado, 0, 0, movimentoX, movimentoY, 1, 0, &quantCaminhos);
     
     // se possúi resultado (variável resultado foi alterada), mostra o resultado
     if (resultado->mapa[0][0].passo != 0){
@@ -45,30 +46,30 @@ int RecursaoBT(TMapa* mapa, TMapa* resultado, int posX, int posY, int movimentoX
             
             // SE QUISER VER O QUE ESTA ROLANDO EM TEMPO REAL SÓ TIRAR OS "//" ABAIXO
             
-            //printf("\n");
-            //mostraTempoReal(mapa);
-            //printf("\n");
-            //mostraMatriz(mapa);
+            // printf("\n");
+            // mostraTempoReal(mapa);
+            // printf("\n");
+            // mostraMatriz(mapa);
             
             
             // atualização dos passos
             // ultima passada no baú conta como passo
-            mapa->mapa[yn][xn].passo = passoAtual+1; 
+            mapa->mapa[xn][yn].passo = passoAtual+1; 
             
             // se for chave aumenta a quantidade de chaves obtidas
-            if(mapa->mapa[yn][xn].tipo == Chave){
+            if(mapa->mapa[xn][yn].tipo == Chave){
                     chavesObtidas++;
                 }
 
             // se for baú e não tem a quantidade de chaves o suficiente
-            if((chavesObtidas != mapa->qntChaves) && (mapa->mapa[yn][xn].tipo == Bau)){
+            if((chavesObtidas != mapa->qntChaves) && (mapa->mapa[xn][yn].tipo == Bau)){
 
                 // chegou no baú sem chave, volta pra buscar as chaves 
-                mapa->mapa[yn][xn].passo = 0;
+                mapa->mapa[xn][yn].passo = 0;
             }
 
             // se for baú e tem a quantidade de chaves o suficiente
-            else if((chavesObtidas == mapa->qntChaves) && (mapa->mapa[yn][xn].tipo == Bau)){
+            else if((chavesObtidas == mapa->qntChaves) && (mapa->mapa[xn][yn].tipo == Bau)){
 
                 // TODO: salvar todos os resultados
 
@@ -82,7 +83,7 @@ int RecursaoBT(TMapa* mapa, TMapa* resultado, int posX, int posY, int movimentoX
                     
                 }
                 // volta o passo, desmarca o caminho para procurar outros caminhos
-                mapa->mapa[yn][xn].passo = 0;
+                mapa->mapa[xn][yn].passo = 0;
             }
 
             // se não for baú avança até encontrar o baú
@@ -92,7 +93,7 @@ int RecursaoBT(TMapa* mapa, TMapa* resultado, int posX, int posY, int movimentoX
                 RecursaoBT(mapa, resultado, xn, yn, movimentoX, movimentoY, passoAtual+1, chavesObtidas, quantCaminhos);
                 
                 // volta o passo, desmarca o caminho para procurar outros caminhos
-                mapa->mapa[yn][xn].passo = 0; 
+                mapa->mapa[xn][yn].passo = 0; 
             }
         }
         
@@ -134,7 +135,7 @@ int inicializaResultado(TMapa* mapa, TMapa* resultado){
 int verificaSeEhMenosCustoso(TMapa* mapa, TMapa* resultado,int xn,int yn){
 
     // compara o passo que chegou no baú com o passo que está na localização do baú do resultado
-    if((mapa->mapa[yn][xn].passo) <= (resultado->mapa[mapa->locBau[0]][mapa->locBau[1]].passo)){
+    if((mapa->mapa[xn][yn].passo) <= (resultado->mapa[mapa->locBau[0]][mapa->locBau[1]].passo)){
         
         return 1;
     }
@@ -144,7 +145,7 @@ int verificaSeEhMenosCustoso(TMapa* mapa, TMapa* resultado,int xn,int yn){
 
 int mostraTempoReal(TMapa* mapa){
 
-    system("sleep 0.1");
+    Sleep(500);
     mostraResultadoGrafico(mapa);
     fflush(stdout);
 
