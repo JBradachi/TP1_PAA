@@ -134,7 +134,7 @@ int inicializaResultado(TMapa* mapa, TMapa* resultado){
 int verificaSeEhMenosCustoso(TMapa* mapa, TMapa* resultado,int xn,int yn){
 
     // compara o passo que chegou no baú com o passo que está na localização do baú do resultado
-    if((mapa->mapa[yn][xn].passo) <= (resultado->mapa[mapa->locBau[0]][mapa->locBau[1]].passo)){   
+    if((mapa->mapa[xn][yn].passo) <= (resultado->mapa[mapa->locBau[0]][mapa->locBau[1]].passo)){   
         return 1;
     }
     return 0;
