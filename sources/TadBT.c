@@ -63,14 +63,14 @@ int RecursaoBT(TMapa* mapa, TMapa* resultado, int posX, int posY, int movimentoX
                 }
 
             // se for baú e não tem a quantidade de chaves o suficiente
-            if((chavesObtidas != mapa->qntChaves) && (mapa->mapa[xn][yn].tipo == Bau)){
+            if((chavesObtidas != mapa->qntChaves) && ehBau(mapa, xn, yn)){
 
                 // chegou no baú sem chave, volta pra buscar as chaves 
                 mapa->mapa[xn][yn].passo = 0;
             }
 
             // se for baú e tem a quantidade de chaves o suficiente
-            else if((chavesObtidas == mapa->qntChaves) && (mapa->mapa[xn][yn].tipo == Bau)){
+            else if((chavesObtidas == mapa->qntChaves) && ehBau(mapa, xn, yn)){
 
                 // mostra todas as possibilidades de resultado
 
