@@ -1,5 +1,22 @@
 #include "TadMapa.h"
 
-int IniciaBT(TMapa* mapa);
+typedef struct Recursoes{
+    int totalDeRecursoes;
+    int profundidadeMax;
+}TRecursoes;
 
-int RecursaoBT(TMapa* mapa, int posX, int posY, int q, int v[4], int h[4], int passo, int chavesObtidas);
+int IniciaBT(TMapa* mapa, TMapa* resultado, char mostrarPossibilidades, char mostraTR, TRecursoes* recursoes);
+
+int RecursaoBT(TMapa* mapa, TMapa* resultado, int posX, int posY, int v[4], int h[4], int passoAtual, int chavesObtidas, int* quantCaminhos, char mostrarPossibilidades, char mostraTR, TRecursoes* recursoes);
+
+int salvaResultado(TMapa* mapa, TMapa* resultado);
+
+int inicializaResultado(TMapa* mapa, TMapa* resultado);
+
+int verificaSeEhMenosCustoso(TMapa* mapa, TMapa* resultado,int xn,int yn);
+
+int mostraTempoReal(TMapa* mapa);
+
+int mostraVetorResultado(TMapa *resultado, int X, int Y, int passo);
+
+void RetornaAnaliseRecursao(TRecursoes recursao);

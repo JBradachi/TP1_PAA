@@ -1,6 +1,22 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#define CYN   "\x1B[36m"
+#define WHT   "\x1B[37m"
+#define YLW   "\033[33m"
+#define RED   "\033[31m"
+#define GRN     "\033[32m"
+#define NONE  "\033[0m"
+#ifdef _WIN32
+    #include <windows.h>
+    #define SLEEP_MS(ms) Sleep(ms)
+    #define clear() system("cls"); 
+#else
+    #include <unistd.h>
+    #define clear() system("clear");
+    #define SLEEP_MS(ms) usleep(ms * 1000)
+#endif
+
 
 enum MaterialLabirinto { //Material labirinto (se e parede, se e espaço vazio, etc)
     EspacoVazio,
@@ -28,12 +44,14 @@ typedef struct Mapa{
     int locBau[2];
 }TMapa;
 
-int ehParede(TMapa *mapa, int X, int Y);
-int ehChave(TMapa *mapa, int X, int Y);
-int ehBau(TMapa *mapa, int X, int Y);
-int verificaCelula(TMapa *mapa, int X, int Y);
 int alocaMatriz(TMapa *mapa);
 int mostraMatriz(TMapa *mapa);
 int mostraMatrizPassos(TMapa *mapa);
 int preencheMatrizTeste(TMapa *mapa);
 int manipulaArquivo(char *pTexto, TMapa *mapa);
+int mostraResultadoGrafico(TMapa* resultado);
+int ehParede(TMapa *mapa, int X, int Y);
+int ehChave(TMapa *mapa, int X, int Y);
+int ehBau(TMapa *mapa, int X, int Y);
+int celulaDentroDoMapa(int xn, int yn, TMapa* mapa);
+int verificaCelula(int xn, int yn, TMapa* mapa);

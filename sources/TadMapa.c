@@ -1,16 +1,5 @@
 #include "../headers/TadMapa.h"
 
-//retorna 1 para celula valida e 0 para invalida
-int verificaCelula(TMapa *mapa, int X, int Y){
-    if (X < 0 || X > mapa->coluna){
-        return 0;
-    }
-    if (Y < 0 || Y > mapa->linha){
-        return 0;
-    }
-    return 1;
-}
-
 //retorna se eh parede
 int ehParede(TMapa *mapa, int X, int Y){
     if (mapa->mapa[X][Y].tipo == Parede){
@@ -35,6 +24,32 @@ int ehBau(TMapa *mapa, int X, int Y){
     return 0;
 }
 
+//retorna 1 se a celula existe
+int celulaDentroDoMapa(int xn, int yn, TMapa* mapa){
+    
+    // verifica se está dentro do mapa
+    if(xn>=0 && yn>=0 && (yn < mapa->coluna) && (xn < mapa->linha)){
+        return 1;
+    }
+    
+    return 0;
+}
+
+int verificaCelula(int xn, int yn, TMapa* mapa){
+    
+    // verifica se está dentro do mapa
+    if(celulaDentroDoMapa(xn, yn, mapa)){
+
+        // verifica se é possível ir (caso de ser parede e caso de ser caminho já andado)
+        if ((!ehParede(mapa, xn, yn)) && (mapa->mapa[xn][yn].passo == 0)){
+            return 1;
+        }
+    }
+    
+    return 0;
+}
+
+
 int alocaMatriz(TMapa *mapa){
     mapa->mapa = (TCelula **) malloc(mapa->linha * sizeof(TCelula*));
     for(int i=0; i<(mapa->linha); i++){
@@ -48,34 +63,23 @@ int mostraMatriz(TMapa *mapa){
         for(j=0; j<mapa->coluna; j++){
             switch (mapa->mapa[i][j].tipo){
                 case Parede:
-                    printf(" 1 ");
+                    printf(GRN " 1 ");
                     break;
                 case EspacoVazio:
-                    printf(" 0 ");
+                    printf( CYN " 0 ");
                     break;
                 case Chave:
-                    printf(" C ");
+                    printf(YLW " C ");
                     break;
                 case Bau:
-                    printf(" X ");
+                    printf(RED " X ");
                     break;
                 
                 default:
                     break;
                 }
         }
-        printf("\n");
-    }
-}
-
-
-int mostraMatrizPassos(TMapa *mapa){
-    int i, j;
-    for(i=0; i<mapa->linha; i++){
-        for(j=0; j<mapa->coluna; j++){
-            printf("\t%d ", mapa->mapa[i][j].passo);
-        }
-        printf("\n");
+        printf(NONE"\n");
     }
 }
 
@@ -96,10 +100,6 @@ int manipulaArquivo(char *pTexto, TMapa *mapa)
     int i = 0;
     int j = -1;
 
-
-    // fscanf lê uma linha inteira do arquivo
-    printf("Arquivo: %s\n", pTexto);
-
     
     if ((arquivo = fopen(pTexto, "r")) != NULL)
     {
@@ -118,26 +118,27 @@ int manipulaArquivo(char *pTexto, TMapa *mapa)
                 switch (valor)
                 {
                 case '1':
-                    mapa->mapa[i][j].tipo = Parede;
+                    mapa->mapa[j][i].tipo = Parede;
                     break;
                 case '0':
-                    mapa->mapa[i][j].tipo = EspacoVazio;
+                    mapa->mapa[j][i].tipo = EspacoVazio;
                     break;
                 case 'C':
-                    mapa->mapa[i][j].tipo = Chave;
+                    mapa->mapa[j][i].tipo = Chave;
                     break;
                 case 'X':
-                    mapa->mapa[i][j].tipo = Bau;
+                    mapa->mapa[j][i].tipo = Bau;
                     break;
                 
                 default:
                     break;
                 }
-                mapa->mapa[i][j].passo = 0;
+                mapa->mapa[j][i].passo = 0;
                 i++;
             }
 
         }
+        printf("\nArquivo %s lido com sucesso!!\n", pTexto);
     }else{
         printf("Erro ao abrir o arquivo\n");
         return 0;
@@ -145,4 +146,28 @@ int manipulaArquivo(char *pTexto, TMapa *mapa)
 
     fclose(arquivo);
     return 1;
+}
+
+int mostraResultadoGrafico(TMapa* resultado){
+    int i, j;
+    for(i=0; i<resultado->linha; i++){
+        for(j=0; j<resultado->coluna; j++){
+                if(resultado->mapa[i][j].tipo == Parede){
+                    printf( GRN " P ");
+                }else if(resultado->mapa[i][j].tipo == EspacoVazio && resultado->mapa[i][j].passo == 0){
+                    printf( CYN " %d ", resultado->mapa[i][j].passo);
+                }else if(resultado->mapa[i][j].tipo == EspacoVazio && resultado->mapa[i][j].passo > 0){
+                    printf( WHT " %d ", resultado->mapa[i][j].passo);
+                }else if(resultado->mapa[i][j].tipo == Bau){
+                    printf( RED " %d ", resultado->mapa[i][j].passo);
+                }else if(resultado->mapa[i][j].tipo == Chave){
+                    printf( YLW " %d ", resultado->mapa[i][j].passo);
+                }
+            
+            if(resultado->mapa[i][j].passo < 10){
+                printf(" ");
+            }
+        }
+        printf(NONE"\n");
+    }
 }
