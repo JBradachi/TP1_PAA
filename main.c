@@ -31,7 +31,7 @@ int main(){
 
                 strcat(path, arquivo);
                 strcat(path, ".txt");
-                isLido  = manipulaArquivo(path, &m1);
+                isLido  = manipulaArquivo(path, &m1, isLido);
                 break;
             case 2:
                 if(isLido) mostraMatriz(&m1);

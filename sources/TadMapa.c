@@ -92,22 +92,28 @@ int preencheMatrizTeste(TMapa *mapa){
     }
 }
 
-int manipulaArquivo(char *pTexto, TMapa *mapa)
+int manipulaArquivo(char *pTexto, TMapa *mapa, int isLido)
 {
     FILE *arquivo;
     char c;
     char valor = 'n';
     int i = 0;
     int j = -1;
-
+    int k;
     
+    if(isLido == 1){
+        desalocaMatriz(mapa);
+    }
+
     if ((arquivo = fopen(pTexto, "r")) != NULL)
     {
+
         fscanf(arquivo, "%d %d", &mapa->linha, &mapa->coluna);
         fscanf(arquivo, "%d", &mapa->qntChaves);
         fscanf(arquivo, "%d %d", &mapa->locBau[0], &mapa->locBau[1]);
 
         alocaMatriz(mapa);
+
         while (fscanf(arquivo, "%c", &valor) != EOF)
         { 
             if (valor == '\n')
@@ -170,4 +176,13 @@ int mostraResultadoGrafico(TMapa* resultado){
         }
         printf(NONE"\n");
     }
+}
+
+int desalocaMatriz(TMapa* mapa){
+    int k;
+    for(k=0; k<mapa->linha; k++){
+        free(mapa->mapa[k]);
+    }
+    free(mapa->mapa);
+    return 0;
 }

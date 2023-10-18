@@ -47,10 +47,11 @@ typedef struct Mapa{
 int alocaMatriz(TMapa *mapa);
 int mostraMatriz(TMapa *mapa);
 int preencheMatrizTeste(TMapa *mapa);
-int manipulaArquivo(char *pTexto, TMapa *mapa);
+int manipulaArquivo(char *pTexto, TMapa *mapa, int isLido);
 int mostraResultadoGrafico(TMapa* resultado);
 int ehParede(TMapa *mapa, int X, int Y);
 int ehChave(TMapa *mapa, int X, int Y);
 int ehBau(TMapa *mapa, int X, int Y);
 int celulaDentroDoMapa(int xn, int yn, TMapa* mapa);
 int verificaCelula(int xn, int yn, TMapa* mapa);
+int desalocaMatriz(TMapa* mapa);
