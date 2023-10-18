@@ -11,15 +11,16 @@ void pausar(){
 
 int main(){
     TMapa m1, resultado;
-    int opcao, isLido;
-    char mostrarPossibilidades;
+    int opcao, isLido, isExec;
+    char mostrarPossibilidades, mostraTempReal;
     char path[100] = "./entradas/";
     char arquivo[30] = "teste copy.txt";
+    TRecursoes recursao;
     
     while (1)
     {
         clear();
-        printf(NONE "\nEscolha uma das opções abaixo: \n 1 - Entrar com arquivo \n 2 - Mostrar matriz\n 3 - Calcular caminho \n 4 - Sair\n>>> ");
+        printf(NONE "\nEscolha uma das opcoes abaixo: \n 1 - Entrar com arquivo \n 2 - Mostrar matriz\n 3 - Calcular caminho\n 4 - Retornar analise de recursao \n 5 - Sair\n>>> ");
         // ignorar o \n na leitura da entrada
         scanf(" %d%*[^\n]",&opcao);
         switch (opcao)
@@ -40,12 +41,21 @@ int main(){
                 if(isLido){
                     printf("\nDeseja mostrar todas as possiveis possibilidades de caminho? [S/N] \n >>> ");
                     scanf(" %c%*[^\n]",&mostrarPossibilidades);
+                    printf("\nDeseja mostrar em tempo real? [S/N] \n >>> ");
+                    scanf(" %c%*[^\n]",&mostraTempReal);
                     printf("\n");
-                    IniciaBT(&m1, &resultado, mostrarPossibilidades);
+                    isExec = IniciaBT(&m1, &resultado, mostrarPossibilidades, mostraTempReal, &recursao);
+                    
                 }  
                 else printf(RED "\nERRO!!! Nenhum arquivo inserido\n");
                 break;
             case 4:
+                if(isLido && isExec){
+                    RetornaAnaliseRecursao(recursao);
+                }
+                else printf(RED "\nERRO!!! Nenhum arquivo inserido/executado\n");
+                break;
+            case 5:
                 exit(0);
             default:
                 printf(RED "\nERRO!! Opcao inexistente\n");

@@ -1,10 +1,12 @@
 #include "../headers/TadBT.h"
 
 
-int IniciaBT(TMapa* mapa, TMapa* resultado, char mostrarPossibilidades){
+int IniciaBT(TMapa* mapa, TMapa* resultado, char mostrarPossibilidades, char mostraTR, TRecursoes* recursoes){
 
     int movimentoX[4] = {0, 1, 0, -1}, movimentoY[4] = {1, 0, -1, 0};
     int quantCaminhos = 0; 
+    recursoes->profundidadeMax = 0;
+    recursoes->totalDeRecursoes = 0;
     // com essa configutação indiana bones anda: direita -> baixo -> esquerda -> cima.
     
     // ponto de início já começa como 1
@@ -14,7 +16,7 @@ int IniciaBT(TMapa* mapa, TMapa* resultado, char mostrarPossibilidades){
     inicializaResultado(mapa, resultado);
 
     // inicia a recursão do primeiro ponto
-    RecursaoBT(mapa, resultado, 0, 0, movimentoX, movimentoY, 1, 0, &quantCaminhos, mostrarPossibilidades);
+    RecursaoBT(mapa, resultado, 0, 0, movimentoX, movimentoY, 1, 0, &quantCaminhos, mostrarPossibilidades, mostraTR, recursoes);
     
     // se possúi resultado (variável resultado foi alterada), mostra o resultado
     if (resultado->mapa[0][0].passo != 0){
@@ -31,12 +33,15 @@ int IniciaBT(TMapa* mapa, TMapa* resultado, char mostrarPossibilidades){
         printf("Indiana Jones nao consegue abrir o bau :( ");
     }
 
-    return 0;
+    return 1;
 }
 
-int RecursaoBT(TMapa* mapa, TMapa* resultado, int posX, int posY, int movimentoX[4], int movimentoY[4], int passoAtual, int chavesObtidas, int* quantCaminhos, char mostrarPossibilidades){
+int RecursaoBT(TMapa* mapa, TMapa* resultado, int posX, int posY, int movimentoX[4], int movimentoY[4], int passoAtual, int chavesObtidas, int* quantCaminhos, char mostrarPossibilidades, char mostraTR, TRecursoes* recursoes){
     int xn, yn, i=-1; // só pra i começar em 0 no while
-    
+    recursoes->totalDeRecursoes += 1;
+    if(mapa->mapa[posX][posY].passo > recursoes->profundidadeMax){
+        recursoes->profundidadeMax = mapa->mapa[posX][posY].passo;
+    }
     // "i" é o indice referente a como indiana bones irá dar pelo labirinto
     // linhas 36, 37, 38 e 39 são as possíveis movimentações
     while(i<3){
@@ -48,11 +53,13 @@ int RecursaoBT(TMapa* mapa, TMapa* resultado, int posX, int posY, int movimentoX
         if(verificaCelula(xn, yn, mapa)){ 
             
             // SE QUISER VER O QUE ESTA ROLANDO EM TEMPO REAL SÓ TIRAR OS "//" ABAIXO
+            if(mostraTR == 'S'){
+                printf("\n");
+                mostraTempoReal(mapa);
+                printf("\n");
+                //mostraMatriz(mapa);
+            }
             
-            // printf("\n");
-            // mostraTempoReal(mapa);
-            // printf("\n");
-            // mostraMatriz(mapa);
             
             
             // atualização dos passos
@@ -99,7 +106,7 @@ int RecursaoBT(TMapa* mapa, TMapa* resultado, int posX, int posY, int movimentoX
             else{
 
                 // avança no mapa 
-                RecursaoBT(mapa, resultado, xn, yn, movimentoX, movimentoY, passoAtual+1, chavesObtidas, quantCaminhos, mostrarPossibilidades);
+                RecursaoBT(mapa, resultado, xn, yn, movimentoX, movimentoY, passoAtual+1, chavesObtidas, quantCaminhos, mostrarPossibilidades, mostraTR, recursoes);
                 
                 // volta o passo, desmarca o caminho para procurar outros caminhos
                 mapa->mapa[xn][yn].passo = 0; 
@@ -154,8 +161,11 @@ int verificaSeEhMenosCustoso(TMapa* mapa, TMapa* resultado,int xn,int yn){
 
 int mostraTempoReal(TMapa* mapa){
 
-    SLEEP_MS(500);
+    
     mostraResultadoGrafico(mapa);
+    SLEEP_MS(100);
+    // espaçamento entre matrizes
+    printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
     fflush(stdout);
 
     return 0;
@@ -172,4 +182,8 @@ int mostraVetorResultado(TMapa *resultado, int X, int Y, int passo){
     else if (celulaDentroDoMapa(X-1, Y, resultado) && resultado->mapa[X-1][Y].passo == passo+1) mostraVetorResultado(resultado, X-1, Y, passo+1);
     else if (celulaDentroDoMapa(X, Y-1, resultado) && resultado->mapa[X][Y-1].passo == passo+1) mostraVetorResultado(resultado, X, Y-1, passo+1);
 
+}
+
+void RetornaAnaliseRecursao(TRecursoes recursao){
+    printf("\nProfundidade maxima da recursao: %d\nTotal de recursoes feitas: %d\n", recursao.profundidadeMax, recursao.totalDeRecursoes);
 }
