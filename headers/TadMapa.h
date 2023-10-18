@@ -46,7 +46,6 @@ typedef struct Mapa{
 
 int alocaMatriz(TMapa *mapa);
 int mostraMatriz(TMapa *mapa);
-int mostraMatrizPassos(TMapa *mapa);
 int preencheMatrizTeste(TMapa *mapa);
 int manipulaArquivo(char *pTexto, TMapa *mapa);
 int mostraResultadoGrafico(TMapa* resultado);
