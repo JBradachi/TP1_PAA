@@ -100,9 +100,6 @@ int manipulaArquivo(char *pTexto, TMapa *mapa)
     int i = 0;
     int j = -1;
 
-
-    // fscanf lê uma linha inteira do arquivo
-
     
     if ((arquivo = fopen(pTexto, "r")) != NULL)
     {

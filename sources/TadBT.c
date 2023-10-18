@@ -52,12 +52,10 @@ int RecursaoBT(TMapa* mapa, TMapa* resultado, int posX, int posY, int movimentoX
         // verifica se é possível ir para o lugar, se não for testa a próxima movimentação
         if(verificaCelula(xn, yn, mapa)){ 
             
-            // SE QUISER VER O QUE ESTA ROLANDO EM TEMPO REAL SÓ TIRAR OS "//" ABAIXO
             if(mostraTR == 'S'){
                 printf("\n");
                 mostraTempoReal(mapa);
                 printf("\n");
-                //mostraMatriz(mapa);
             }
             
             
