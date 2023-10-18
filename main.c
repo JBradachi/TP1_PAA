@@ -22,6 +22,7 @@ int main(){
         clear();
         printf(NONE "\nEscolha uma das opcoes abaixo: \n 1 - Entrar com arquivo \n 2 - Mostrar matriz\n 3 - Calcular caminho\n 4 - Retornar analise de recursao \n 5 - Sair\n>>> ");
         // ignorar o \n na leitura da entrada
+        opcao = 0;
         scanf(" %d%*[^\n]",&opcao);
         switch (opcao)
         {
@@ -41,8 +42,16 @@ int main(){
                 if(isLido){
                     printf("\nDeseja mostrar todas as possiveis possibilidades de caminho? [S/N] \n >>> ");
                     scanf(" %c%*[^\n]",&mostrarPossibilidades);
+                    if (mostrarPossibilidades != 'S' && mostrarPossibilidades != 'N'){
+                        printf("DIGITE UM DOS CARACTERES ESPECIFICADOS!!!\n");
+                        break;
+                    }
                     printf("\nDeseja mostrar em tempo real? [S/N] \n >>> ");
                     scanf(" %c%*[^\n]",&mostraTempReal);
+                    if (mostraTempReal != 'S' && mostraTempReal != 'N'){
+                        printf("DIGITE UM DOS CARACTERES ESPECIFICADOS!!!\n");
+                        break;
+                    }
                     printf("\n");
                     isExec = IniciaBT(&m1, &resultado, mostrarPossibilidades, mostraTempReal, &recursao);
                     
