@@ -12,7 +12,7 @@ void pausar(){
 int main(){
     TMapa m1, resultado;
     int opcao, isLido, isExec;
-    char mostrarPossibilidades, mostraTempReal;
+    char mostrarPossibilidades,ehGlobo, mostraTempReal;
     char path[100] = "./entradas/";
     char arquivo[30] = "teste copy.txt";
     TRecursoes recursao;
@@ -40,6 +40,12 @@ int main(){
                 break;
             case 3: 
                 if(isLido){
+                    printf("Deseja que o mapa se comporte como um globo? [S/N] \n >>> ");
+                    scanf(" %c%*[^\n]",&ehGlobo);
+                    if (ehGlobo != 'S' && ehGlobo != 'N'){
+                        printf("DIGITE UM DOS CARACTERES ESPECIFICADOS!!!\n");
+                        break;
+                    }
                     printf("\nDeseja mostrar todas as possiveis possibilidades de caminho? [S/N] \n >>> ");
                     scanf(" %c%*[^\n]",&mostrarPossibilidades);
                     if (mostrarPossibilidades != 'S' && mostrarPossibilidades != 'N'){
@@ -53,7 +59,9 @@ int main(){
                         break;
                     }
                     printf("\n");
-                    isExec = IniciaBT(&m1, &resultado, mostrarPossibilidades, mostraTempReal, &recursao);
+                    if (ehGlobo == 'N') isExec = IniciaBT(&m1, &resultado, mostrarPossibilidades, mostraTempReal, &recursao);
+                    if (ehGlobo == 'S') isExec = IniciaGloboBT(&m1, &resultado, mostrarPossibilidades, mostraTempReal, &recursao);
+                
                     
                 }  
                 else printf(RED "\nERRO!!! Nenhum arquivo inserido\n");

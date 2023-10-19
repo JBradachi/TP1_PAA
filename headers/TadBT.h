@@ -20,3 +20,9 @@ int mostraTempoReal(TMapa* mapa);
 int mostraVetorResultado(TMapa *resultado, int X, int Y, int passo);
 
 void RetornaAnaliseRecursao(TRecursoes recursao);
+
+int IniciaGloboBT(TMapa* mapa, TMapa* resultado, char mostrarPossibilidades, char mostraTR, TRecursoes* recursoes);
+
+int RecursaoGloboBT(TMapa* mapa, TMapa* resultado, int posX, int posY, int movimentoX[4], int movimentoY[4], int passoAtual, int chavesObtidas, int* quantCaminhos, char mostrarPossibilidades, char mostraTR, TRecursoes* recursoes);
+
+int mostraVetorResultadoGlobo(TMapa *resultado, int X, int Y, int passo);
