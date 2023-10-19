@@ -100,7 +100,6 @@ int manipulaArquivo(char *pTexto, TMapa *mapa)
     int i = 0;
     int j = -1;
 
-    
     if ((arquivo = fopen(pTexto, "r")) != NULL)
     {
         fscanf(arquivo, "%d %d", &mapa->linha, &mapa->coluna);
@@ -140,7 +139,7 @@ int manipulaArquivo(char *pTexto, TMapa *mapa)
         }
         printf("\nArquivo %s lido com sucesso!!\n", pTexto);
     }else{
-        printf("Erro ao abrir o arquivo\n");
+        printf(RED"\n\nErro ao abrir o arquivo\n");
         return 0;
     }
 
