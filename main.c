@@ -1,4 +1,5 @@
 #include <string.h>
+#include <ctype.h>
 #include "./headers/TadBT.h"
 
 void pausar(){
@@ -42,10 +43,18 @@ int main(){
                 if(isLido){
                     printf("\nDeseja mostrar todas as possiveis possibilidades de caminho? [S/N] \n >>> ");
                     scanf(" %c%*[^\n]",&mostrarPossibilidades);
+                    if (mostrarPossibilidades != 'S' && mostrarPossibilidades != 's' && mostrarPossibilidades != 'N' && mostrarPossibilidades != 'n' ){
+                        printf("Por favor digite um caracter valido!!!");
+                        continue;
+                    }
                     printf("\nDeseja mostrar em tempo real? [S/N] \n >>> ");
                     scanf(" %c%*[^\n]",&mostraTempReal);
+                    if (mostraTempReal != 'S' && mostraTempReal != 's' && mostraTempReal != 'N' && mostraTempReal != 'n' ){
+                        printf("Por favor digite um caracter valido!!!");
+                        continue;
+                    }
                     printf("\n");
-                    isExec = IniciaBT(&m1, &resultado, mostrarPossibilidades, mostraTempReal, &recursao);
+                    isExec = IniciaBT(&m1, &resultado,toupper(mostrarPossibilidades), toupper(mostraTempReal), &recursao);
                     
                 }  
                 else printf(RED "\nERRO!!! Nenhum arquivo inserido\n");
