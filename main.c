@@ -28,10 +28,10 @@ int main(){
             case 1:
                 printf("\nDigite o nome do arquivo [sem .txt]: ");
                 scanf("%s", arquivo);
-
                 strcat(path, arquivo);
                 strcat(path, ".txt");
                 isLido  = manipulaArquivo(path, &m1);
+                strcpy(path, "./entradas/");
                 break;
             case 2:
                 if(isLido) mostraMatriz(&m1);
