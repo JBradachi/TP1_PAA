@@ -20,3 +20,5 @@ int mostraTempoReal(TMapa* mapa);
 int mostraVetorResultado(TMapa *resultado, int X, int Y, int passo);
 
 void RetornaAnaliseRecursao(TRecursoes recursao);
+
+void InicializaRecursao(TRecursoes * recursao);

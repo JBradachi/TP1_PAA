@@ -183,5 +183,14 @@ int mostraVetorResultado(TMapa *resultado, int X, int Y, int passo){
 }
 
 void RetornaAnaliseRecursao(TRecursoes recursao){
+    if (recursao.profundidadeMax == 0 && recursao.totalDeRecursoes == 0){
+        printf("Ainda nao foi realizada nenhuma analise recursiva!!! Por favor, calcule o caminho primeiro");
+        return;
+    }
     printf("\nProfundidade maxima da recursao: %d\nTotal de recursoes feitas: %d\n", recursao.profundidadeMax, recursao.totalDeRecursoes);
+}
+
+void InicializaRecursao(TRecursoes * recursao){
+    recursao->profundidadeMax = 0;
+    recursao->totalDeRecursoes = 0;
 }

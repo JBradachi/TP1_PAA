@@ -16,6 +16,7 @@ int main(){
     char path[100] = "./entradas/";
     char arquivo[30] = "teste copy.txt";
     TRecursoes recursao;
+    InicializaRecursao(&recursao);
     
     while (1)
     {
