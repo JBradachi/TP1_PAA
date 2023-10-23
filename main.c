@@ -11,7 +11,7 @@ void pausar(){
 
 int main(){
     TMapa m1, resultado;
-    int opcao, isLido, isExec;
+    int opcao, isLido = 0, isExec;
     char mostrarPossibilidades, mostraTempReal;
     char path[100] = "./entradas/";
     char arquivo[30] = "teste copy.txt";
