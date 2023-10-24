@@ -333,7 +333,7 @@ int recursaoVetorGlobo(TMapa *resultado, int X, int Y, int passo){
         if (yn < 0) yn = (resultado->coluna)-1;
         if (yn >= resultado->coluna) yn = 0;
 
-        if (ehBau(resultado, xn, yn)){
+        if (ehBau(resultado, xn, yn) && resultado->mapa[xn][yn].passo == passo+1){
             printf("[%d][%d]\n", xn, yn);
             return 0;
         }
