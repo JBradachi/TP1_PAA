@@ -9,6 +9,14 @@ void pausar(){
     getchar();
 }
 
+int verificarOpcao(char opcao){
+    if (opcao != 'S' && opcao != 'N'){
+        printf("DIGITE UM DOS CARACTERES ESPECIFICADOS!!!\n");
+        return 1;
+    }
+    return 0;
+}
+
 int main(){
     TMapa m1, resultado;
     int opcao, isLido, isExec;
@@ -43,22 +51,13 @@ int main(){
                 if(isLido){
                     printf("Deseja que o mapa se comporte como um globo? [S/N] \n >>> ");
                     scanf(" %c%*[^\n]",&ehGlobo);
-                    if (ehGlobo != 'S' && ehGlobo != 'N'){
-                        printf("DIGITE UM DOS CARACTERES ESPECIFICADOS!!!\n");
-                        break;
-                    }
+                    if(verificarOpcao(ehGlobo)) break;
                     printf("\nDeseja mostrar todas as possiveis possibilidades de caminho? [S/N] \n >>> ");
                     scanf(" %c%*[^\n]",&mostrarPossibilidades);
-                    if (mostrarPossibilidades != 'S' && mostrarPossibilidades != 'N'){
-                        printf("DIGITE UM DOS CARACTERES ESPECIFICADOS!!!\n");
-                        break;
-                    }
+                    if(verificarOpcao(mostrarPossibilidades)) break;
                     printf("\nDeseja mostrar em tempo real? [S/N] \n >>> ");
                     scanf(" %c%*[^\n]",&mostraTempReal);
-                    if (mostraTempReal != 'S' && mostraTempReal != 'N'){
-                        printf("DIGITE UM DOS CARACTERES ESPECIFICADOS!!!\n");
-                        break;
-                    }
+                    if(verificarOpcao(mostraTempReal)) break;
                     printf("\n");
                     if (ehGlobo == 'N') isExec = IniciaBT(&m1, &resultado, mostrarPossibilidades, mostraTempReal, &recursao);
                     if (ehGlobo == 'S') isExec = IniciaGloboBT(&m1, &resultado, mostrarPossibilidades, mostraTempReal, &recursao);

@@ -161,7 +161,7 @@ int mostraTempoReal(TMapa* mapa){
 
     
     mostraResultadoGrafico(mapa);
-    Sleep(100);
+    SLEEP_MS(100);
     //SLEEP_MS(100);
     // espaçamento entre matrizes
     printf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
